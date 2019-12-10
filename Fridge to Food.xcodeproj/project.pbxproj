@@ -9,8 +9,7 @@
 /* Begin PBXBuildFile section */
 		39FA028B23A01181004A807A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FA028A23A01181004A807A /* AppDelegate.swift */; };
 		39FA028D23A01181004A807A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FA028C23A01181004A807A /* SceneDelegate.swift */; };
-		39FA028F23A01181004A807A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FA028E23A01181004A807A /* ViewController.swift */; };
-		39FA029223A01181004A807A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39FA029023A01181004A807A /* Main.storyboard */; };
+		39FA028F23A01181004A807A /* RecipeSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FA028E23A01181004A807A /* RecipeSearchViewController.swift */; };
 		39FA029423A01184004A807A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39FA029323A01184004A807A /* Assets.xcassets */; };
 		39FA029723A01184004A807A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39FA029523A01184004A807A /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -19,8 +18,7 @@
 		39FA028723A01181004A807A /* Fridge to Food.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fridge to Food.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		39FA028A23A01181004A807A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39FA028C23A01181004A807A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		39FA028E23A01181004A807A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		39FA029123A01181004A807A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		39FA028E23A01181004A807A /* RecipeSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSearchViewController.swift; sourceTree = "<group>"; };
 		39FA029323A01184004A807A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		39FA029623A01184004A807A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		39FA029823A01184004A807A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -58,13 +56,20 @@
 			children = (
 				39FA028A23A01181004A807A /* AppDelegate.swift */,
 				39FA028C23A01181004A807A /* SceneDelegate.swift */,
-				39FA028E23A01181004A807A /* ViewController.swift */,
-				39FA029023A01181004A807A /* Main.storyboard */,
 				39FA029323A01184004A807A /* Assets.xcassets */,
 				39FA029523A01184004A807A /* LaunchScreen.storyboard */,
 				39FA029823A01184004A807A /* Info.plist */,
+				39FA02A123A04B32004A807A /* Controllers */,
 			);
 			path = "Fridge to Food";
+			sourceTree = "<group>";
+		};
+		39FA02A123A04B32004A807A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				39FA028E23A01181004A807A /* RecipeSearchViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +132,6 @@
 			files = (
 				39FA029723A01184004A807A /* LaunchScreen.storyboard in Resources */,
 				39FA029423A01184004A807A /* Assets.xcassets in Resources */,
-				39FA029223A01181004A807A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,7 +142,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39FA028F23A01181004A807A /* ViewController.swift in Sources */,
+				39FA028F23A01181004A807A /* RecipeSearchViewController.swift in Sources */,
 				39FA028B23A01181004A807A /* AppDelegate.swift in Sources */,
 				39FA028D23A01181004A807A /* SceneDelegate.swift in Sources */,
 			);
@@ -147,14 +151,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		39FA029023A01181004A807A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				39FA029123A01181004A807A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		39FA029523A01184004A807A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -287,6 +283,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C4L47757WW;
 				INFOPLIST_FILE = "Fridge to Food/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -305,6 +302,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C4L47757WW;
 				INFOPLIST_FILE = "Fridge to Food/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
