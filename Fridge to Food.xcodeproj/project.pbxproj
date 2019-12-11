@@ -12,6 +12,8 @@
 		39FA028F23A01181004A807A /* RecipeSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FA028E23A01181004A807A /* RecipeSearchViewController.swift */; };
 		39FA029423A01184004A807A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39FA029323A01184004A807A /* Assets.xcassets */; };
 		39FA029723A01184004A807A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39FA029523A01184004A807A /* LaunchScreen.storyboard */; };
+		39FA02A423A04DB1004A807A /* Recipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FA02A323A04DB1004A807A /* Recipes.swift */; };
+		39FA02A823A0546E004A807A /* RecipeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FA02A723A0546E004A807A /* RecipeRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		39FA029323A01184004A807A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		39FA029623A01184004A807A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		39FA029823A01184004A807A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		39FA02A323A04DB1004A807A /* Recipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipes.swift; sourceTree = "<group>"; };
+		39FA02A723A0546E004A807A /* RecipeRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,12 +58,13 @@
 		39FA028923A01181004A807A /* Fridge to Food */ = {
 			isa = PBXGroup;
 			children = (
+				39FA02A223A04D90004A807A /* Models */,
+				39FA02A123A04B32004A807A /* Controllers */,
 				39FA028A23A01181004A807A /* AppDelegate.swift */,
 				39FA028C23A01181004A807A /* SceneDelegate.swift */,
 				39FA029323A01184004A807A /* Assets.xcassets */,
 				39FA029523A01184004A807A /* LaunchScreen.storyboard */,
 				39FA029823A01184004A807A /* Info.plist */,
-				39FA02A123A04B32004A807A /* Controllers */,
 			);
 			path = "Fridge to Food";
 			sourceTree = "<group>";
@@ -70,6 +75,15 @@
 				39FA028E23A01181004A807A /* RecipeSearchViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		39FA02A223A04D90004A807A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				39FA02A323A04DB1004A807A /* Recipes.swift */,
+				39FA02A723A0546E004A807A /* RecipeRequest.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,6 +159,8 @@
 				39FA028F23A01181004A807A /* RecipeSearchViewController.swift in Sources */,
 				39FA028B23A01181004A807A /* AppDelegate.swift in Sources */,
 				39FA028D23A01181004A807A /* SceneDelegate.swift in Sources */,
+				39FA02A423A04DB1004A807A /* Recipes.swift in Sources */,
+				39FA02A823A0546E004A807A /* RecipeRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

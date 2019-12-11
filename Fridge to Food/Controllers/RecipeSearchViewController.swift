@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  RecipeSearchViewController.swift
 //  Fridge to Food
 //
 //  Created by Debanik Purkayastha on 12/10/19.
@@ -9,7 +9,6 @@
 import UIKit
 
 class RecipeSearchViewController: UIViewController {
-    
     let label = UILabel()
     let textField = UITextField()
     let button = UIButton(type: .roundedRect)
@@ -35,8 +34,16 @@ class RecipeSearchViewController: UIViewController {
     }
     
     @objc func searchForRecipes() {
-        print("Sending recipies")
-        textField.resignFirstResponder()
+        let queryText = textField.text ?? ""
+        let recipeRequest = RecipeRequest(ingredients: queryText)
+        recipeRequest.getRecipes { result in
+            switch result {
+                case .failure(let error):
+                    print(error)
+                case .success(let recipes):
+                    print(recipes)
+            }
+        }
     }
     
     override func viewDidLoad() {
