@@ -72,7 +72,7 @@ class RecipeCell: BaseCell {
     
     let recipeImageView : UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "")
+        imageView.image = UIImage()
         imageView.layer.cornerRadius = 40
         imageView.clipsToBounds = true
         return imageView
