@@ -26,9 +26,21 @@ class BaseCell: UICollectionViewCell {
 
 class RecipeCell: BaseCell {
     
+    var btnTapAction : (()->())?
+    
     var recipe: Recipe? {
         didSet {
             recipeTitleLabel.text = recipe?.title
+            if let likes = recipe?.missedIngredientsCount {
+                if likes == 1 {
+                    missingIngredientCountLabel.text = String(likes) + " missing ingredient"
+                } else {
+                    missingIngredientCountLabel.text = String(likes) + " missing ingredients"
+                }
+            }
+            else{
+               missingIngredientCountLabel.text = "None";
+            }
             setupRecipeImage()
         }
     }
@@ -61,6 +73,8 @@ class RecipeCell: BaseCell {
         title.text = "Shrimp Scampi"
         title.textColor = .black
         title.textAlignment = .center
+        title.lineBreakMode = .byWordWrapping
+        title.numberOfLines = 0
         return title
     }()
     
@@ -79,10 +93,18 @@ class RecipeCell: BaseCell {
     }()
     
     let cookMeButton : UIButton = {
-        let button = UIButton()
+        var button = UIButton()
         button.setTitle("Cook Me!", for: .normal)
         button.backgroundColor = .blue
         return button
+    }()
+    
+    let missingIngredientCountLabel : UILabel = {
+        let title = UILabel()
+        title.text = ""
+        title.textColor = .black
+        title.textAlignment = .center
+        return title
     }()
     
     override func setupViews() {
@@ -90,14 +112,27 @@ class RecipeCell: BaseCell {
         addSubview(separatorView)
         addSubview(recipeTitleLabel)
         addSubview(cookMeButton)
+        addSubview(missingIngredientCountLabel)
+        cookMeButton.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
         
         // Horizontal Constraints
         addConstraintsWithFormat(format: "H:|-40-[v0]-40-|", views: recipeImageView)
         addConstraintsWithFormat(format: "H:|[v0]|", views: separatorView)
         addConstraintsWithFormat(format: "H:|-40-[v0]-40-|", views: recipeTitleLabel)
         addConstraintsWithFormat(format: "H:|-100-[v0]-100-|", views: cookMeButton)
+        addConstraintsWithFormat(format: "H:|-40-[v0]-40-|", views: missingIngredientCountLabel)
         
         // Vertical Constraints
-        addConstraintsWithFormat(format: "V:|-40-[v0]-15-[v1(25)]-15-[v2(35)]-160-[v3(1)]|", views: recipeImageView, recipeTitleLabel, cookMeButton, separatorView)
+        addConstraintsWithFormat(format: "V:|-40-[v0]-15-[v1(75)]-15-[v2(35)]-15-[v3(25)]-120-[v4(1)]|", views: recipeImageView, recipeTitleLabel, cookMeButton, missingIngredientCountLabel, separatorView)
+    }
+    
+    @objc func buttonClicked(sender : UIButton){
+        if let recipes = recipe?.title{
+            let alert = UIAlertController(title: "Are you hungry?", message: "Would you like to make \(recipes)?", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Yes", style: .cancel, handler: nil)
+            alert.addAction(cancelAction)
+            self.window?.rootViewController?.present(alert, animated: true, completion: nil)
+            btnTapAction?()
+        }
     }
 }

@@ -25,21 +25,4 @@ struct RecipeRequest {
         
         self.resourceURL = resourceURL
      }
-    
-    func getRecipes (completion: @escaping(Result<[Recipe], RecipeError>) -> Void) {
-        let dataTask = URLSession.shared.dataTask(with: resourceURL) {data, _, _ in
-            guard let jsonData = data else {
-                completion(.failure(.noDataAvailable))
-                return
-            }
-            do {
-
-                completion(.success([]))
-            } catch {
-                print("Could not get API data. \(error), \(error.localizedDescription)")
-                completion(.failure(.cannotProcessData))
-            }
-        }
-        dataTask.resume()
-    }
 }

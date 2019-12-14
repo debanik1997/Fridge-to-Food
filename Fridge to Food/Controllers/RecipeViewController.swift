@@ -42,9 +42,10 @@ class RecipeViewController: UICollectionViewController, UICollectionViewDelegate
                     recipe.title = dictionary["title"] as? String
                     recipe.id = dictionary["id"] as? Int
                     recipe.image = dictionary["image"] as? String
+                    recipe.missedIngredientsCount = dictionary["missedIngredientCount"] as? Int
+                    recipe.likes = dictionary["likes"] as? Int
                     self.recipes?.append(recipe)
                 }
-                
                 DispatchQueue.main.async {
                     self.collectionView?.reloadData()
                 }
@@ -56,8 +57,8 @@ class RecipeViewController: UICollectionViewController, UICollectionViewDelegate
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         fetch_recipes(ingredients: ingredients)
+        super.viewDidLoad()
         navigationItem.title = "Recipes"
         collectionView?.backgroundColor = .white
         collectionView.register(RecipeCell.self, forCellWithReuseIdentifier: "cellID")
@@ -70,6 +71,14 @@ class RecipeViewController: UICollectionViewController, UICollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath) as! RecipeCell
         cell.recipe = recipes?[indexPath.item]
+        
+        // set a "Callback Closure" in the cell
+        cell.btnTapAction = {
+            () in
+            print("Edit tapped in cell", indexPath)
+            // EDIT HERE
+        }
+        
         return cell
     }
     
