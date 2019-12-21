@@ -20,7 +20,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        let navController = UINavigationController(rootViewController: RecipeSearchViewController())
+        let searchVC = RecipeSearchViewController()
+        let fridgeVC = FridgeViewController()
+        let tabBarController = UITabBarController()
+        
+        let searchItem = UITabBarItem()
+        searchItem.title = "Search"
+        searchItem.image = UIImage(named: "search")
+        searchVC.tabBarItem = searchItem
+        
+        let fridgeItem = UITabBarItem()
+        fridgeItem.title = "Fridge"
+        fridgeItem.image = UIImage(named: "fridge")
+        fridgeVC.tabBarItem = fridgeItem
+        
+        tabBarController.viewControllers = [searchVC, fridgeVC]
+        tabBarController.selectedViewController = searchVC
+        tabBarController.selectedIndex = 2
+        let navController = UINavigationController(rootViewController: tabBarController)
+        
         window?.rootViewController = navController
         window?.makeKeyAndVisible()
     }

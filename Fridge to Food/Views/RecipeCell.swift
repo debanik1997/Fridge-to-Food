@@ -7,40 +7,17 @@
 //
 
 import UIKit
-import Foundation
-
-class BaseCell: UICollectionViewCell {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupViews()
-    }
-    
-    func setupViews() {
-        
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
 
 class RecipeCell: BaseCell {
     
     var btnTapAction : (()->())?
     
+    var navigationController: UINavigationController?
+    
     var recipe: Recipe? {
         didSet {
+            // Set views based on recipe
             recipeTitleLabel.text = recipe?.title
-            if let likes = recipe?.missedIngredientsCount {
-                if likes == 1 {
-                    missingIngredientCountLabel.text = String(likes) + " missing ingredient"
-                } else {
-                    missingIngredientCountLabel.text = String(likes) + " missing ingredients"
-                }
-            }
-            else{
-               missingIngredientCountLabel.text = "None";
-            }
             setupRecipeImage()
         }
     }
@@ -59,6 +36,7 @@ class RecipeCell: BaseCell {
             }.resume()
         }
     }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()

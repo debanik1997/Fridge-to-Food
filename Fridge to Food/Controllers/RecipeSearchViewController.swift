@@ -6,6 +6,7 @@
 //  Copyright © 2019 Debanik Purkayastha. All rights reserved.
 //
 
+import Firebase
 import UIKit
 
 class RecipeSearchViewController: UIViewController {
@@ -40,6 +41,7 @@ class RecipeSearchViewController: UIViewController {
     }
     
     @objc func searchForRecipes() {
+        textField.resignFirstResponder()
         self.navigationController!.pushViewController(RecipeViewController(ingredients: textField.text ?? ""), animated: true)
     }
     

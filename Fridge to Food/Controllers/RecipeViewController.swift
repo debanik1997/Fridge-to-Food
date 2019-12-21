@@ -42,7 +42,6 @@ class RecipeViewController: UICollectionViewController, UICollectionViewDelegate
                     recipe.title = dictionary["title"] as? String
                     recipe.id = dictionary["id"] as? Int
                     recipe.image = dictionary["image"] as? String
-                    recipe.missedIngredientsCount = dictionary["missedIngredientCount"] as? Int
                     recipe.likes = dictionary["likes"] as? Int
                     self.recipes?.append(recipe)
                 }
@@ -71,6 +70,7 @@ class RecipeViewController: UICollectionViewController, UICollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath) as! RecipeCell
         cell.recipe = recipes?[indexPath.item]
+        cell.navigationController = self.navigationController
         
         // set a "Callback Closure" in the cell
         cell.btnTapAction = {
@@ -78,7 +78,6 @@ class RecipeViewController: UICollectionViewController, UICollectionViewDelegate
             print("Edit tapped in cell", indexPath)
             // EDIT HERE
         }
-        
         return cell
     }
     

@@ -13,10 +13,10 @@ class Recipe: NSObject {
     var id:Int?
     var title:String?
     var image:String?
-    var missedIngredientsCount:Int?
+    var ingredients:[Ingredient]?
+//    var missedIngredientsCount:Int?
 //    var missedIngredients:[Ingredient]
 //    var usedIngredients:[Ingredient]
 //    var unusedIngredients:[Ingredient]
     var likes:Int?
-    
 }

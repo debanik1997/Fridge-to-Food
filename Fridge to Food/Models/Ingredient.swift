@@ -9,6 +9,12 @@
 import UIKit
 import Foundation
 
-struct Ingredient:Decodable {
-    var name:String
+class Ingredient:NSObject {
+//    var id: Int?
+    var name:String?
+//    var group: String?
+//    var expirationDate: Date?
+    init (name: String) {
+        self.name = name
+    }
 }
