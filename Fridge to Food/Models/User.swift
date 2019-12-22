@@ -14,5 +14,4 @@ class User: NSObject {
     var email: String?
     var password: String?
     var fridge: Fridge?
-    
 }
