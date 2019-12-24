@@ -12,8 +12,9 @@ class FoodGroupCell : BaseCell {
     
     var foodGroup: String? {
         didSet {
-            // Set views based on recipe
-            foodGroupLabel.text = foodGroup
+//            foodGroupLabel.text = foodGroup
+//            foodGroupLabel.backgroundColor = UIColor(patternImage: UIImage(named: "Grains")!)
+            foodGroupImage.image = UIImage(named: foodGroup!)
         }
     }
     
@@ -35,14 +36,23 @@ class FoodGroupCell : BaseCell {
         return label
     }()
     
+    let foodGroupImage : UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage()
+        imageView.layer.cornerRadius = 10
+        imageView.clipsToBounds = true
+        return imageView
+    }()
+    
     override func setupViews() {
-        addSubview(foodGroupLabel)
+        addSubview(foodGroupImage)
         
         // Horizontal Constraint
-        addConstraintsWithFormat(format: "H:|-0-[v0]-0-|", views: foodGroupLabel)
+        addConstraintsWithFormat(format: "H:|-0-[v0]-0-|", views: foodGroupImage)
         
         // Vertical Constraint
-        addConstraintsWithFormat(format: "V:|-0-[v0]-0-|", views: foodGroupLabel)
+        addConstraintsWithFormat(format: "V:|-0-[v0]-0-|", views: foodGroupImage)
         
     }
 }

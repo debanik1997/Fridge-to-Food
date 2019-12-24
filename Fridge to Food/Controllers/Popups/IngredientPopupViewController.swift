@@ -16,6 +16,10 @@ final class IngredientPopupViewController: UIViewController {
     fileprivate var baseView: IngredientPopupView {
         return view as! IngredientPopupView
     }
+    
+    public var foodGroups = [String]() {
+        didSet { baseView.foodGroupPicker.loadDropdownData(data: foodGroups)}
+    }
 
     override func loadView() {
         view = IngredientPopupView(frame: .zero)
@@ -24,8 +28,6 @@ final class IngredientPopupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         baseView.titleLabel.text = "Add an Ingredient"
-        let foodGroups = ["", "Grains", "Meat/Fish", "Dairy", "Produce", "Fats/Sugar", "Misc."]
-        baseView.foodGroupPicker.loadDropdownData(data: foodGroups)
     }
     
     func getFoodGroup() -> String? {

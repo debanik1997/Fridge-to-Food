@@ -10,6 +10,7 @@ import UIKit
 import PopupDialog
 import Firebase
 import FirebaseFirestore
+import FaceAware
 
 class FridgeViewController: UIViewController {
     private let itemsPerRow: CGFloat = 3
@@ -19,18 +20,21 @@ class FridgeViewController: UIViewController {
         bottom: 50.0,
         right: 20.0
     )
-    private let foodGroups = ["Grains", "Meat/Fish", "Dairy", "Produce", "Fats/Sugar", "Misc."]
+    private let foodGroups = ["Grains", "Meat", "Dairy", "Produce", "Fats", "Misc."]
     weak var collectionView: UICollectionView!
     var fridgeRef: DocumentReference!
     
     override func loadView() {
         super.loadView()
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "user")
+        imageView.image = UIImage(named: "Debanik")
+        imageView.focusOnFaces = true
         imageView.frame = CGRect(x: self.view.frame.midX-100, y: self.view.frame.minY + 150, width: 200, height: 200)
         imageView.layer.cornerRadius = 100
         imageView.clipsToBounds = true
-        self.view.addSubview(imageView)
+        imageView.didFocusOnFaces = {
+             self.view.addSubview(imageView)
+        }
         
         let nameLabel = UILabel()
         nameLabel.text = "Debanik Purkayastha"
@@ -96,6 +100,7 @@ class FridgeViewController: UIViewController {
                 self.addToFridge(ingredientName: ingredientName, foodGroup: foodGroup, fridgeID: "1")
             }
         }
+        ingredientPopupVC.foodGroups = self.foodGroups
         popup.addButton(cancel)
         popup.addButton(add)
         ingredientPopupVC.popup = popup
@@ -144,7 +149,7 @@ extension FridgeViewController: UICollectionViewDelegate {
                         ingredients.append(document.data()["name"] as! String)
                     }
                     let vc = PopupTableViewController(nibName: nil, bundle: nil)
-                    let popup = PopupDialog(viewController: vc, tapGestureDismissal: false) {
+                    let popup = PopupDialog(viewController: vc, transitionStyle: .zoomIn, tapGestureDismissal: false) {
                         guard let ingredient = vc.selectedIngredient else { return }
                         print("User selected ingredient: \(ingredient)")
                     }

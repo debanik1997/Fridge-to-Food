@@ -27,8 +27,8 @@ class PickerView : UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate {
  
     init(pickerData: [String], dropdownField: UITextField) {
         super.init(frame: CGRect.zero)
- 
         self.pickerData = pickerData
+        self.pickerData.insert("", at: 0)
         self.pickerTextField = dropdownField
  
         self.delegate = self

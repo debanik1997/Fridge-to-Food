@@ -8,11 +8,14 @@
 
 import Firebase
 import UIKit
+import FirebaseFirestore
 
 class RecipeSearchViewController: UIViewController {
     let label = UILabel()
     let textField = UITextField()
-    let button = UIButton(type: .roundedRect)
+    let recipeButton = UIButton(type: .roundedRect)
+    let fridgeButton = UIButton(type: .roundedRect)
+    var fridgeRef: DocumentReference!
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -30,11 +33,18 @@ class RecipeSearchViewController: UIViewController {
         textField.frame = CGRect(x: 20, y: label.frame.maxY + 10, width: self.view.frame.width - 40, height: 30)
         self.view.addSubview(textField)
         
-        button.setTitle("Find Me Recipies", for: .normal)
-        button.backgroundColor = .blue
-        button.frame = CGRect(x: 20, y: textField.frame.maxY + 10, width: self.view.frame.width - 40, height: 30)
-        button.addTarget(self, action: #selector(RecipeSearchViewController.searchForRecipes), for: .touchUpInside)
-        self.view.addSubview(button)
+        recipeButton.setTitle("Find Me Recipies", for: .normal)
+        recipeButton.backgroundColor = .blue
+        recipeButton.frame = CGRect(x: 20, y: textField.frame.maxY + 10, width: self.view.frame.width - 40, height: 50)
+        recipeButton.addTarget(self, action: #selector(RecipeSearchViewController.searchForRecipes), for: .touchUpInside)
+        self.view.addSubview(recipeButton)
+        
+        fridgeButton.setTitle("Search From Fridge", for: .normal)
+        fridgeButton.backgroundColor = .blue
+        fridgeButton.frame = CGRect(x: 20, y: textField.frame.maxY + 70, width: self.view.frame.width - 40, height: 50)
+        fridgeButton.addTarget(self, action: #selector(RecipeSearchViewController.searchForRecipesFromFridge), for: .touchUpInside)
+        self.view.addSubview(fridgeButton)
+        
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -44,11 +54,28 @@ class RecipeSearchViewController: UIViewController {
         textField.resignFirstResponder()
         self.navigationController!.pushViewController(RecipeViewController(ingredients: textField.text ?? ""), animated: true)
     }
+   
+    @objc func searchForRecipesFromFridge() {
+        textField.resignFirstResponder()
+        self.fridgeRef.collection("ingredients").getDocuments() {
+            (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    var ingredientString = String()
+                    for document in querySnapshot!.documents {
+                        ingredientString = "\(ingredientString)\(document.data()["name"] ?? ""), "
+                    }
+                    self.navigationController!.pushViewController(RecipeViewController(ingredients: ingredientString), animated: true)
+                }
+            }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.view.backgroundColor = .white
+        self.fridgeRef = Firestore.firestore().collection("fridges").document("1")
     }
 
 
