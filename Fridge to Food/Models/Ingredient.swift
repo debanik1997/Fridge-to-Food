@@ -9,12 +9,9 @@
 import UIKit
 import Foundation
 
-class Ingredient:NSObject {
-//    var id: Int?
+struct Ingredient:Codable {
+    var id: Int?
     var name:String?
-//    var group: String?
+    var group: String?
 //    var expirationDate: Date?
-    init (name: String) {
-        self.name = name
-    }
 }

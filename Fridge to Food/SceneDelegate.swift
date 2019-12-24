@@ -22,11 +22,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         let searchVC = RecipeSearchViewController()
         let fridgeVC = FridgeViewController()
+        
         let tabBarController = UITabBarController()
         
         let searchItem = UITabBarItem()
-        searchItem.title = "Search"
-        searchItem.image = UIImage(named: "search")
+        searchItem.title = "Home"
+        searchItem.image = UIImage(named: "home")
         searchVC.tabBarItem = searchItem
         
         let fridgeItem = UITabBarItem()

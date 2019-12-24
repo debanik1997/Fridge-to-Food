@@ -1,5 +1,5 @@
 //
-//  IngredientCell.swift
+//  FoodGroupCell.swift
 //  Fridge to Food
 //
 //  Created by Debanik Purkayastha on 12/21/19.

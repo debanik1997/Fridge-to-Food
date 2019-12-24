@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 extension UIView {
     func addConstraintsWithFormat(format: String, views: UIView...) {
@@ -17,5 +18,11 @@ extension UIView {
             viewsDict[key] = view
         }
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: viewsDict))
+    }
+}
+ 
+extension UITextField {
+    func loadDropdownData(data: [String]) {
+        self.inputView = PickerView(pickerData: data, dropdownField: self)
     }
 }

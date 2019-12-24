@@ -9,9 +9,5 @@
 import Foundation
 
 class Fridge: NSObject {
-    var carbs: [Ingredient]?
-    var proteins: [Ingredient]?
-    var dairy: [Ingredient]?
-    var produce: [Ingredient]?
-    var fatsAndSugars: [Ingredient]?
+    var ingredients: [Ingredient]?
 }

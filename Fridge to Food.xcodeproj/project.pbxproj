@@ -13,8 +13,13 @@
 		3925EDC923A57BFF00DA9347 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3925EDC823A57BFF00DA9347 /* GoogleService-Info.plist */; };
 		3925EDCB23A57F2800DA9347 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3925EDCA23A57F2800DA9347 /* User.swift */; };
 		3925EDCD23AD420F00DA9347 /* Fridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3925EDCC23AD420F00DA9347 /* Fridge.swift */; };
-		3925EDCF23AD4EDC00DA9347 /* icons8-search-24.png in Resources */ = {isa = PBXBuildFile; fileRef = 3925EDCE23AD4EDC00DA9347 /* icons8-search-24.png */; };
 		392805AD23A1E8BF00C39248 /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392805AC23A1E8BF00C39248 /* RecipeViewController.swift */; };
+		3942D1FA23B1278A00092406 /* IngredientPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3942D1F923B1278A00092406 /* IngredientPopupViewController.swift */; };
+		3942D1FC23B127A900092406 /* IngredientPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3942D1FB23B127A900092406 /* IngredientPopupView.swift */; };
+		3942D20023B12B2D00092406 /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3942D1FF23B12B2D00092406 /* PickerView.swift */; };
+		398AA6C123B27BB5001815BE /* PopupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398AA6C023B27BB5001815BE /* PopupTableViewController.swift */; };
+		398AA6C323B27BD5001815BE /* PopupTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398AA6C223B27BD5001815BE /* PopupTableView.swift */; };
+		398AA6C523B27BEC001815BE /* PopupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398AA6C423B27BEC001815BE /* PopupTableViewCell.swift */; };
 		39F0AC9823AE6E7A009EDC67 /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F0AC9723AE6E7A009EDC67 /* FridgeViewController.swift */; };
 		39F0AC9A23AE70E2009EDC67 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F0AC9923AE70E2009EDC67 /* BaseCell.swift */; };
 		39F0AC9C23AE7425009EDC67 /* FoodGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F0AC9B23AE7425009EDC67 /* FoodGroupCell.swift */; };
@@ -35,8 +40,13 @@
 		3925EDC823A57BFF00DA9347 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3925EDCA23A57F2800DA9347 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3925EDCC23AD420F00DA9347 /* Fridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fridge.swift; sourceTree = "<group>"; };
-		3925EDCE23AD4EDC00DA9347 /* icons8-search-24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons8-search-24.png"; path = "../../../Downloads/Search-24-50px/icons8-search-24.png"; sourceTree = "<group>"; };
 		392805AC23A1E8BF00C39248 /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
+		3942D1F923B1278A00092406 /* IngredientPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientPopupViewController.swift; sourceTree = "<group>"; };
+		3942D1FB23B127A900092406 /* IngredientPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientPopupView.swift; sourceTree = "<group>"; };
+		3942D1FF23B12B2D00092406 /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
+		398AA6C023B27BB5001815BE /* PopupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupTableViewController.swift; sourceTree = "<group>"; };
+		398AA6C223B27BD5001815BE /* PopupTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupTableView.swift; sourceTree = "<group>"; };
+		398AA6C423B27BEC001815BE /* PopupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupTableViewCell.swift; sourceTree = "<group>"; };
 		39F0AC9723AE6E7A009EDC67 /* FridgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeViewController.swift; sourceTree = "<group>"; };
 		39F0AC9923AE70E2009EDC67 /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		39F0AC9B23AE7425009EDC67 /* FoodGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodGroupCell.swift; sourceTree = "<group>"; };
@@ -69,9 +79,10 @@
 		390EA7C223A284C6004E74B0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				390EA7C323A284E7004E74B0 /* RecipeCell.swift */,
-				39F0AC9923AE70E2009EDC67 /* BaseCell.swift */,
-				39F0AC9B23AE7425009EDC67 /* FoodGroupCell.swift */,
+				3942D20123B157D600092406 /* CollectionViewCells */,
+				3942D1FB23B127A900092406 /* IngredientPopupView.swift */,
+				3942D1FF23B12B2D00092406 /* PickerView.swift */,
+				398AA6C223B27BD5001815BE /* PopupTableView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -82,6 +93,26 @@
 				390EA7C523A2853D004E74B0 /* UIExtensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3942D20123B157D600092406 /* CollectionViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				390EA7C323A284E7004E74B0 /* RecipeCell.swift */,
+				39F0AC9923AE70E2009EDC67 /* BaseCell.swift */,
+				39F0AC9B23AE7425009EDC67 /* FoodGroupCell.swift */,
+				398AA6C423B27BEC001815BE /* PopupTableViewCell.swift */,
+			);
+			path = CollectionViewCells;
+			sourceTree = "<group>";
+		};
+		398AA6C623B27F06001815BE /* Popups */ = {
+			isa = PBXGroup;
+			children = (
+				3942D1F923B1278A00092406 /* IngredientPopupViewController.swift */,
+				398AA6C023B27BB5001815BE /* PopupTableViewController.swift */,
+			);
+			path = Popups;
 			sourceTree = "<group>";
 		};
 		39FA027E23A01181004A807A = {
@@ -112,7 +143,6 @@
 				39FA028A23A01181004A807A /* AppDelegate.swift */,
 				39FA028C23A01181004A807A /* SceneDelegate.swift */,
 				39FA029323A01184004A807A /* Assets.xcassets */,
-				3925EDCE23AD4EDC00DA9347 /* icons8-search-24.png */,
 				39FA029523A01184004A807A /* LaunchScreen.storyboard */,
 				39FA029823A01184004A807A /* Info.plist */,
 				3925EDC823A57BFF00DA9347 /* GoogleService-Info.plist */,
@@ -123,6 +153,7 @@
 		39FA02A123A04B32004A807A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				398AA6C623B27F06001815BE /* Popups */,
 				39FA028E23A01181004A807A /* RecipeSearchViewController.swift */,
 				392805AC23A1E8BF00C39248 /* RecipeViewController.swift */,
 				39F0AC9723AE6E7A009EDC67 /* FridgeViewController.swift */,
@@ -220,7 +251,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				39FA029723A01184004A807A /* LaunchScreen.storyboard in Resources */,
-				3925EDCF23AD4EDC00DA9347 /* icons8-search-24.png in Resources */,
 				39FA029423A01184004A807A /* Assets.xcassets in Resources */,
 				3925EDC923A57BFF00DA9347 /* GoogleService-Info.plist in Resources */,
 			);
@@ -277,12 +307,18 @@
 			files = (
 				39FA028F23A01181004A807A /* RecipeSearchViewController.swift in Sources */,
 				39FA028B23A01181004A807A /* AppDelegate.swift in Sources */,
+				398AA6C123B27BB5001815BE /* PopupTableViewController.swift in Sources */,
 				3925EDCD23AD420F00DA9347 /* Fridge.swift in Sources */,
 				390EA7C923A2ADC4004E74B0 /* Ingredient.swift in Sources */,
 				392805AD23A1E8BF00C39248 /* RecipeViewController.swift in Sources */,
+				398AA6C523B27BEC001815BE /* PopupTableViewCell.swift in Sources */,
 				39F0AC9A23AE70E2009EDC67 /* BaseCell.swift in Sources */,
+				3942D1FC23B127A900092406 /* IngredientPopupView.swift in Sources */,
 				39F0AC9C23AE7425009EDC67 /* FoodGroupCell.swift in Sources */,
 				39F0AC9823AE6E7A009EDC67 /* FridgeViewController.swift in Sources */,
+				3942D20023B12B2D00092406 /* PickerView.swift in Sources */,
+				3942D1FA23B1278A00092406 /* IngredientPopupViewController.swift in Sources */,
+				398AA6C323B27BD5001815BE /* PopupTableView.swift in Sources */,
 				390EA7C623A2853D004E74B0 /* UIExtensions.swift in Sources */,
 				390EA7C423A284E7004E74B0 /* RecipeCell.swift in Sources */,
 				39FA028D23A01181004A807A /* SceneDelegate.swift in Sources */,
