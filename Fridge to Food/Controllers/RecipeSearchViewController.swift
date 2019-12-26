@@ -20,7 +20,7 @@ class RecipeSearchViewController: UIViewController {
     init() {
         super.init(nibName: nil, bundle: nil)
         label.text = "What do you want to cook today?"
-        label.textColor = .black
+        label.textColor = UIColor(hexString: "664147")
         label.textAlignment = .center
         label.frame = CGRect(x: 0, y: self.view.frame.midY-40, width: self.view.frame.width, height: 20)
         self.view.addSubview(label)
@@ -34,13 +34,15 @@ class RecipeSearchViewController: UIViewController {
         self.view.addSubview(textField)
         
         recipeButton.setTitle("Find Me Recipies", for: .normal)
-        recipeButton.backgroundColor = .blue
+        recipeButton.setTitleColor(UIColor(hexString: "664147"), for: .normal)
+        recipeButton.backgroundColor = UIColor(hexString: "2F9C95")
         recipeButton.frame = CGRect(x: 20, y: textField.frame.maxY + 10, width: self.view.frame.width - 40, height: 50)
         recipeButton.addTarget(self, action: #selector(RecipeSearchViewController.searchForRecipes), for: .touchUpInside)
         self.view.addSubview(recipeButton)
         
         fridgeButton.setTitle("Search From Fridge", for: .normal)
-        fridgeButton.backgroundColor = .blue
+        fridgeButton.setTitleColor(UIColor(hexString: "664147"), for: .normal)
+        fridgeButton.backgroundColor = UIColor(hexString: "2F9C95")
         fridgeButton.frame = CGRect(x: 20, y: textField.frame.maxY + 70, width: self.view.frame.width - 40, height: 50)
         fridgeButton.addTarget(self, action: #selector(RecipeSearchViewController.searchForRecipesFromFridge), for: .touchUpInside)
         self.view.addSubview(fridgeButton)
@@ -74,7 +76,7 @@ class RecipeSearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = UIColor(hexString: "E5F9E0")
         self.fridgeRef = Firestore.firestore().collection("fridges").document("1")
     }
 

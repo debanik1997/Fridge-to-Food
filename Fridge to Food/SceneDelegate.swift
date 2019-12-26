@@ -38,7 +38,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         tabBarController.viewControllers = [searchVC, fridgeVC]
         tabBarController.selectedViewController = searchVC
         tabBarController.selectedIndex = 2
+        tabBarController.tabBar.barTintColor = UIColor(hexString: "2F9C95")
+        tabBarController.tabBar.tintColor = .white
         let navController = UINavigationController(rootViewController: tabBarController)
+        navController.navigationBar.barTintColor = UIColor(hexString: "2F9C95")
         
         window?.rootViewController = navController
         window?.makeKeyAndVisible()

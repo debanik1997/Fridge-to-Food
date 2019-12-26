@@ -10,8 +10,10 @@ import UIKit
 import Foundation
 
 struct Ingredient:Codable {
-    var id: Int?
-    var name:String?
-    var group: String?
-//    var expirationDate: Date?
+    var name:String
+    var group: String
+    init(name: String, group: String) {
+        self.name = name
+        self.group = group
+    }
 }

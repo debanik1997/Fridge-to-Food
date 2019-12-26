@@ -8,6 +8,25 @@
 
 import Foundation
 
-class Fridge: NSObject {
-    var ingredients: [Ingredient]?
+class Fridge: CustomStringConvertible {
+    var ingredients: [Ingredient]
+    
+    init() {
+        ingredients = [Ingredient]()
+    }
+    
+    // for testing
+    public var description: String {
+        var s = ""
+        for ingredient in self.ingredients {
+            s.append("[\(ingredient.group): \(ingredient.name))]")
+            s.append(", ")
+        }
+        return s
+    }
+    
+    func addIngredient(ingredient: Ingredient) {
+        self.ingredients.append(ingredient)
+    }
 }
+

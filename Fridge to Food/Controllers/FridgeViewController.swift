@@ -20,9 +20,11 @@ class FridgeViewController: UIViewController {
         bottom: 50.0,
         right: 20.0
     )
-    private let foodGroups = ["Grains", "Meat", "Dairy", "Produce", "Fats", "Misc."]
     weak var collectionView: UICollectionView!
     var fridgeRef: DocumentReference!
+    
+    private let foodGroups = ["Grains", "Meat", "Dairy", "Produce", "Fats", "Misc."]
+    private var fridge: Fridge?
     
     override func loadView() {
         super.loadView()
@@ -32,6 +34,12 @@ class FridgeViewController: UIViewController {
         imageView.frame = CGRect(x: self.view.frame.midX-100, y: self.view.frame.minY + 150, width: 200, height: 200)
         imageView.layer.cornerRadius = 100
         imageView.clipsToBounds = true
+        imageView.layer.borderColor = UIColor(hexString: "2F9C95").cgColor
+        imageView.layer.borderWidth = 5.5;
+        imageView.layer.shadowColor = UIColor.black.cgColor
+        imageView.layer.shadowOffset = CGSize(width: 0, height: 1)
+        imageView.layer.shadowOpacity = 1
+        imageView.layer.shadowRadius = 1.0
         imageView.didFocusOnFaces = {
              self.view.addSubview(imageView)
         }
@@ -40,22 +48,24 @@ class FridgeViewController: UIViewController {
         nameLabel.text = "Debanik Purkayastha"
         nameLabel.textColor = .black
         nameLabel.textAlignment = .center
-        nameLabel.frame = CGRect(x: 0, y: imageView.frame.maxY + 5, width: self.view.frame.width, height: 30)
-        nameLabel.font = UIFont(name: "verdana", size: 25.0)
+        nameLabel.frame = CGRect(x: 0, y: imageView.frame.maxY + 5, width: self.view.frame.width, height: 40)
+        nameLabel.font = UIFont(name: "Noteworthy-Light", size: 25.0)
         self.view.addSubview(nameLabel)
         
         let fridgeLabel = UILabel()
         fridgeLabel.text = "Your Fridge"
         fridgeLabel.textColor = .black
         fridgeLabel.textAlignment = .center
-        fridgeLabel.frame = CGRect(x: 0, y: self.view.frame.midY, width: self.view.frame.width, height: 30)
-        fridgeLabel.font = UIFont(name: "verdana", size: 25.0)
+        fridgeLabel.frame = CGRect(x: 0, y: self.view.frame.midY, width: self.view.frame.width, height: 40)
+        fridgeLabel.font = UIFont(name: "Noteworthy-Light", size: 25.0)
         self.view.addSubview(fridgeLabel)
         
         let addButton = UIButton()
         addButton.setTitle("+", for: .normal)
-        addButton.backgroundColor = .blue
-        addButton.frame = CGRect(x: 4.5*self.view.frame.width / 6, y: self.view.frame.midY, width: self.view.frame.width/6, height: 30)
+        addButton.backgroundColor = UIColor(hexString: "2F9C95")
+        addButton.frame = CGRect(x: 4.5*self.view.frame.width / 6, y: self.view.frame.midY, width: self.view.frame.width/6, height: 40)
+        addButton.layer.cornerRadius = 10
+        addButton.clipsToBounds = true
          addButton.addTarget(self, action: #selector(FridgeViewController.showIngredientPopup), for: .touchUpInside)
         self.view.addSubview(addButton)
         
@@ -73,14 +83,36 @@ class FridgeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // self.fridgeRef = Firestore.firestore().collection("fridges").whereField("uid", isEqualTo: userID)
         self.fridgeRef = Firestore.firestore().collection("fridges").document("1")
-        self.view.backgroundColor = .white
-        self.collectionView?.backgroundColor = .white
+        self.getFridge(fridgeDocRef: self.fridgeRef)
+        self.view.backgroundColor = UIColor(hexString: "E5F9E0")
+        self.collectionView?.backgroundColor = UIColor(hexString: "E5F9E0")
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
         self.collectionView.isScrollEnabled = false
         collectionView.register(FoodGroupCell.self, forCellWithReuseIdentifier: "ingredientCell")
+    }
+    
+    func getFridge(fridgeDocRef: DocumentReference) {
+        fridgeDocRef.collection("ingredients").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                let testFridge = Fridge()
+                for document in querySnapshot!.documents {
+                    let result = document.data()
+                    let jsonData = try? JSONSerialization.data(withJSONObject:result)
+                    if let json = jsonData {
+                        let ingredient = try! JSONDecoder().decode(Ingredient.self, from: json)
+                        testFridge.addIngredient(ingredient: ingredient)
+                    }
+                }
+                self.fridge = testFridge
+                DispatchQueue.main.async {
+                    self.collectionView?.reloadData()
+                }
+            }
+        }
     }
     
     @objc func showIngredientPopup() {
@@ -116,8 +148,13 @@ class FridgeViewController: UIViewController {
                 print("Error writing document: \(err)")
             } else {
                 print("Document successfully written!")
+                self.getFridge(fridgeDocRef: self.fridgeRef)
             }
         }
+    }
+    
+    func getIngredientsOfFoodGroup(foodGroup: String) -> [Ingredient] {
+        return self.fridge?.ingredients.filter{$0.group == foodGroup} ?? [Ingredient]()
     }
 }
     
@@ -133,6 +170,7 @@ extension FridgeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ingredientCell", for: indexPath) as! FoodGroupCell
         cell.foodGroup = self.foodGroups[indexPath.row]
+        cell.ingredients = self.getIngredientsOfFoodGroup(foodGroup: self.foodGroups[indexPath.row])
         return cell
     }
 }
