@@ -59,7 +59,7 @@ class RecipeViewController: UICollectionViewController, UICollectionViewDelegate
         fetch_recipes(ingredients: ingredients)
         super.viewDidLoad()
         navigationItem.title = "Recipes"
-        collectionView?.backgroundColor = .white
+        self.view.backgroundColor = UIColor(hexString: "E5F9E0")
         collectionView.register(RecipeCell.self, forCellWithReuseIdentifier: "cellID")
     }
     

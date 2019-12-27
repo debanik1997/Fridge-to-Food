@@ -73,7 +73,9 @@ class RecipeCell: BaseCell {
     let cookMeButton : UIButton = {
         var button = UIButton()
         button.setTitle("Cook Me!", for: .normal)
-        button.backgroundColor = .blue
+        button.backgroundColor = UIColor(hexString: "2F9C95")
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
         return button
     }()
     

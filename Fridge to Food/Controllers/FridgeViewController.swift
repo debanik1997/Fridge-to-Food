@@ -148,7 +148,12 @@ class FridgeViewController: UIViewController {
                 print("Error writing document: \(err)")
             } else {
                 print("Document successfully written!")
-                self.getFridge(fridgeDocRef: self.fridgeRef)
+                let index = self.foodGroups.lastIndex(of: foodGroup)
+                let idxPath = IndexPath(item: index!, section: 0)
+                self.fridge?.addIngredient(ingredient: Ingredient(name: ingredientName, group: foodGroup))
+                DispatchQueue.main.async {
+                    self.collectionView?.reloadItems(at: [idxPath])
+                }
             }
         }
     }
@@ -177,6 +182,7 @@ extension FridgeViewController: UICollectionViewDataSource {
 
 extension FridgeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath)
         fridgeRef.collection("ingredients").whereField("group", isEqualTo: self.foodGroups[indexPath.row])
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
