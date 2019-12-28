@@ -40,7 +40,7 @@ class RecipeSearchViewController: UIViewController {
         recipeButton.addTarget(self, action: #selector(RecipeSearchViewController.searchForRecipes), for: .touchUpInside)
         self.view.addSubview(recipeButton)
         
-        fridgeButton.setTitle("Search From Fridge", for: .normal)
+        fridgeButton.setTitle("What's In My Fridge?", for: .normal)
         fridgeButton.setTitleColor(UIColor(hexString: "664147"), for: .normal)
         fridgeButton.backgroundColor = UIColor(hexString: "2F9C95")
         fridgeButton.frame = CGRect(x: 20, y: textField.frame.maxY + 70, width: self.view.frame.width - 40, height: 50)

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Cosmos
 
 class RecipeCell: BaseCell {
     
@@ -18,7 +19,17 @@ class RecipeCell: BaseCell {
         didSet {
             // Set views based on recipe
             recipeTitleLabel.text = recipe?.title
+            starRating.rating = getRating(likes: recipe?.likes)
             setupRecipeImage()
+        }
+    }
+    
+    func getRating(likes: Int?) -> Double {
+        if let likeCount = likes {
+            let rating = 5 * Double(likeCount) / 300
+            return rating
+        } else {
+            return 0
         }
     }
     
@@ -53,12 +64,15 @@ class RecipeCell: BaseCell {
         title.textAlignment = .center
         title.lineBreakMode = .byWordWrapping
         title.numberOfLines = 0
+        title.font = UIFont(name: "verdana", size: 16)
+        title.translatesAutoresizingMaskIntoConstraints = false
         return title
     }()
     
     let separatorView: UIView = {
         let view = UIView()
         view.backgroundColor = .black
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -67,43 +81,132 @@ class RecipeCell: BaseCell {
         imageView.image = UIImage()
         imageView.layer.cornerRadius = 40
         imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    let cookMeButton : UIButton = {
+    let missingIngredientsButton : UIButton = {
         var button = UIButton()
-        button.setTitle("Cook Me!", for: .normal)
+        button.setTitle("Missing Ingredients", for: .normal)
+        button.titleLabel?.font = UIFont(name: "verdana", size: 14)
         button.backgroundColor = UIColor(hexString: "2F9C95")
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    let missingIngredientCountLabel : UILabel = {
+    let usedIngredientsButton : UIButton = {
+        var button = UIButton()
+        button.setTitle("Used Ingredients", for: .normal)
+        button.titleLabel?.font = UIFont(name: "verdana", size: 14)
+        button.backgroundColor = UIColor(hexString: "2F9C95")
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    let starRating : CosmosView = {
+        var cosmosView = CosmosView()
+        cosmosView.settings.updateOnTouch = false
+        cosmosView.settings.filledColor = UIColor(hexString: "2F9C95")
+        cosmosView.settings.emptyBorderColor = UIColor(hexString: "2F9C95")
+        cosmosView.settings.filledBorderColor = UIColor(hexString: "2F9C95")
+        cosmosView.settings.fillMode = .precise
+        cosmosView.translatesAutoresizingMaskIntoConstraints = false
+        return cosmosView
+    }()
+    
+    let noRatingLabel: UILabel = {
         let title = UILabel()
-        title.text = ""
+        title.text = "No Rating"
         title.textColor = .black
         title.textAlignment = .center
+        title.lineBreakMode = .byWordWrapping
+        title.numberOfLines = 0
+        title.font = UIFont(name: "verdana", size: 16)
+        title.translatesAutoresizingMaskIntoConstraints = false
         return title
+    }()
+
+    let cookMeButton : UIButton = {
+        var button = UIButton()
+        button.setTitle("Cook Me!", for: .normal)
+        button.titleLabel?.font = UIFont(name: "verdana", size: 14)
+        button.backgroundColor = UIColor(hexString: "2F9C95")
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     override func setupViews() {
         addSubview(recipeImageView)
+        let recipeImageConstraints = [
+            recipeImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 26),
+            recipeImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: -1*self.frame.width/4),
+            recipeImageView.widthAnchor.constraint(equalToConstant: 161),
+            recipeImageView.heightAnchor.constraint(equalToConstant: 143)
+        ]
+        NSLayoutConstraint.activate(recipeImageConstraints)
+        
+        if (starRating.rating > 1) {
+            addSubview(starRating)
+            let starRatingConstraints = [
+                starRating.topAnchor.constraint(equalTo: recipeImageView.bottomAnchor, constant: 10),
+                starRating.centerXAnchor.constraint(equalTo: recipeImageView.centerXAnchor, constant: -1*starRating.frame.width/2),
+                starRating.widthAnchor.constraint(equalToConstant: recipeImageView.frame.width),
+                starRating.heightAnchor.constraint(equalToConstant: 24)
+            ]
+             NSLayoutConstraint.activate(starRatingConstraints)
+        }
+        
         addSubview(separatorView)
+        let separatorViewConstraints = [
+            separatorView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            separatorView.widthAnchor.constraint(equalTo: self.widthAnchor),
+            separatorView.heightAnchor.constraint(equalToConstant: 1)
+        ]
+        NSLayoutConstraint.activate(separatorViewConstraints)
+        
         addSubview(recipeTitleLabel)
+        let recipeTitleLabelConstraints = [
+            recipeTitleLabel.topAnchor.constraint(equalTo: recipeImageView.topAnchor),
+            recipeTitleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: self.frame.width/4),
+            recipeTitleLabel.widthAnchor.constraint(equalTo: recipeImageView.widthAnchor),
+            recipeTitleLabel.heightAnchor.constraint(equalToConstant: 40)
+        ]
+        NSLayoutConstraint.activate(recipeTitleLabelConstraints)
+        
+        addSubview(missingIngredientsButton)
+        let missingIngredientsButtonConstraints = [
+            missingIngredientsButton.topAnchor.constraint(equalTo: recipeTitleLabel.bottomAnchor, constant: 10),
+            missingIngredientsButton.centerXAnchor.constraint(equalTo: recipeTitleLabel.centerXAnchor),
+            missingIngredientsButton.widthAnchor.constraint(equalTo: recipeTitleLabel.widthAnchor),
+            missingIngredientsButton.heightAnchor.constraint(equalToConstant: 35)
+        ]
+        NSLayoutConstraint.activate(missingIngredientsButtonConstraints)
+        
+        addSubview(usedIngredientsButton)
+        let usedIngredientsButtonConstraints = [
+            usedIngredientsButton.topAnchor.constraint(equalTo: missingIngredientsButton.bottomAnchor, constant: 10),
+            usedIngredientsButton.centerXAnchor.constraint(equalTo: recipeTitleLabel.centerXAnchor),
+            usedIngredientsButton.widthAnchor.constraint(equalTo: missingIngredientsButton.widthAnchor),
+            usedIngredientsButton.heightAnchor.constraint(equalToConstant: 35)
+        ]
+        NSLayoutConstraint.activate(usedIngredientsButtonConstraints)
+        
         addSubview(cookMeButton)
-        addSubview(missingIngredientCountLabel)
+        let cookMeButtonConstraints = [
+            cookMeButton.topAnchor.constraint(equalTo: usedIngredientsButton.bottomAnchor, constant: 10),
+            cookMeButton.centerXAnchor.constraint(equalTo: recipeTitleLabel.centerXAnchor),
+            cookMeButton.widthAnchor.constraint(equalTo: missingIngredientsButton.widthAnchor),
+            cookMeButton.heightAnchor.constraint(equalToConstant: 55)
+        ]
+        NSLayoutConstraint.activate(cookMeButtonConstraints)
+        
         cookMeButton.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
-        
-        // Horizontal Constraints
-        addConstraintsWithFormat(format: "H:|-40-[v0]-40-|", views: recipeImageView)
-        addConstraintsWithFormat(format: "H:|[v0]|", views: separatorView)
-        addConstraintsWithFormat(format: "H:|-40-[v0]-40-|", views: recipeTitleLabel)
-        addConstraintsWithFormat(format: "H:|-100-[v0]-100-|", views: cookMeButton)
-        addConstraintsWithFormat(format: "H:|-40-[v0]-40-|", views: missingIngredientCountLabel)
-        
-        // Vertical Constraints
-        addConstraintsWithFormat(format: "V:|-40-[v0]-15-[v1(75)]-15-[v2(35)]-15-[v3(25)]-120-[v4(1)]|", views: recipeImageView, recipeTitleLabel, cookMeButton, missingIngredientCountLabel, separatorView)
     }
     
     @objc func buttonClicked(sender : UIButton){

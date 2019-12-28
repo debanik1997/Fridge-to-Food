@@ -21,6 +21,7 @@ class IngredientPopupView: UIView {
     
     lazy var ingredientText: UITextField = {
         let textField = UITextField(frame: .zero)
+        textField.placeholder = "Name of ingredient..."
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.textColor = UIColor(red: 0.25, green: 0.53, blue: 0.91, alpha: 1)
         textField.textAlignment = .center
@@ -33,6 +34,7 @@ class IngredientPopupView: UIView {
       
     lazy var foodGroupPicker: UITextField = {
         let textField = UITextField(frame: .zero)
+        textField.placeholder = "Choose a food group..."
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.textColor = UIColor(red: 0.25, green: 0.53, blue: 0.91, alpha: 1)
         textField.textAlignment = .center

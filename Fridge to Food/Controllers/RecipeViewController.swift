@@ -45,6 +45,7 @@ class RecipeViewController: UICollectionViewController, UICollectionViewDelegate
                     recipe.likes = dictionary["likes"] as? Int
                     self.recipes?.append(recipe)
                 }
+                self.recipes?.sort(by: { $0.likes ?? -1 > $1.likes ?? -1})
                 DispatchQueue.main.async {
                     self.collectionView?.reloadData()
                 }
@@ -59,7 +60,7 @@ class RecipeViewController: UICollectionViewController, UICollectionViewDelegate
         fetch_recipes(ingredients: ingredients)
         super.viewDidLoad()
         navigationItem.title = "Recipes"
-        self.view.backgroundColor = UIColor(hexString: "E5F9E0")
+        collectionView?.backgroundColor = UIColor(hexString: "E5F9E0")
         collectionView.register(RecipeCell.self, forCellWithReuseIdentifier: "cellID")
     }
     
@@ -82,7 +83,7 @@ class RecipeViewController: UICollectionViewController, UICollectionViewDelegate
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 600)
+        return CGSize(width: view.frame.width, height: 250)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

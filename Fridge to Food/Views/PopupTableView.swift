@@ -23,6 +23,7 @@ class PopupTableView: UIView {
     lazy var tableView: UITableView = {
         let tv = UITableView(frame: .zero)
         tv.translatesAutoresizingMaskIntoConstraints = false
+        tv.isUserInteractionEnabled = true
         return tv
     }()
     
@@ -44,3 +45,5 @@ class PopupTableView: UIView {
         NSLayoutConstraint.activate(constraints)
     }
 }
+
+
