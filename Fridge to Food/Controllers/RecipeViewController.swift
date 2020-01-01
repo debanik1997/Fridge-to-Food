@@ -24,36 +24,22 @@ class RecipeViewController: UICollectionViewController, UICollectionViewDelegate
     }
     
     func fetch_recipes(ingredients: String) {
-        let API_KEY = "488ea7c92d34469191c8296b57480d69"
-        let resourceString = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=\(API_KEY)&ingredients=\(ingredients)"
-        let urlString = resourceString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        let resourceURL = URL(string: urlString ?? "")
-        URLSession.shared.dataTask(with: resourceURL!) {data, response, error in
-            if error != nil {
-                print(error as Any)
-                return
-            }
-            do {
-                let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
-                
+        let spoonacularRecipeClient = SpoonacularRecipeClient(apiKey: "488ea7c92d34469191c8296b57480d69")
+        spoonacularRecipeClient.send(SearchRecipesByIngredients(ingredients: ingredients, number: 2, limitLicense: true, ranking: 1, ignorePantry: true)) { response in
+            switch response {
+            case .success(let recipes):
                 self.recipes = [Recipe]()
-                for dictionary in json as! [[String: AnyObject]] {
-                    let recipe = Recipe()
-                    recipe.title = dictionary["title"] as? String
-                    recipe.id = dictionary["id"] as? Int
-                    recipe.image = dictionary["image"] as? String
-                    recipe.likes = dictionary["likes"] as? Int
+                let recipeArray = recipes.results
+                for recipe in recipeArray {
                     self.recipes?.append(recipe)
                 }
-                self.recipes?.sort(by: { $0.likes ?? -1 > $1.likes ?? -1})
                 DispatchQueue.main.async {
                     self.collectionView?.reloadData()
                 }
-                
-            } catch let jsonError{
-                print(jsonError)
+            case .failure(let error):
+                print(error)
             }
-        }.resume()
+        }
     }
     
     override func viewDidLoad() {

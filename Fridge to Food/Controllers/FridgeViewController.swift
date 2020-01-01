@@ -11,6 +11,7 @@ import PopupDialog
 import Firebase
 import FirebaseFirestore
 import FaceAware
+import iOSDropDown
 
 class FridgeViewController: UIViewController {
     private let itemsPerRow: CGFloat = 3
@@ -28,6 +29,7 @@ class FridgeViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
+        
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Debanik")
         imageView.focusOnFaces = true
@@ -123,14 +125,24 @@ class FridgeViewController: UIViewController {
             tapGestureDismissal: false) {
         }
         let cancel = DefaultButton(title: "Cancel") {
-            print("User did not select a food group")
+            print("User did not select an ingredient")
         }
+        
         let add = DefaultButton(title: "Add") {
-            guard let foodGroup = ingredientPopupVC.getFoodGroup() else { return }
-            guard let ingredientName = ingredientPopupVC.getIngredient() else { return }
-            if (foodGroup != "" && ingredientName != "") {
-                self.addToFridge(ingredientName: ingredientName, foodGroup: foodGroup, fridgeID: "1")
+            guard let ingredientName = ingredientPopupVC.selectedIngredient else { return }
+            print(ingredientName)
+            if let path = Bundle.main.path(forResource: "ingredients", ofType: "json") {
+                do {
+                    let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                    let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+                    if let dictionary = jsonResult as? Dictionary<String, AnyObject> {
+                        print("ID: \(dictionary[ingredientName.lowercased()] ?? "nil" as AnyObject)")
+                    }
+                } catch {
+                    print(error)
+                }
             }
+            popup.dismiss()
         }
         ingredientPopupVC.foodGroups = self.foodGroups
         popup.addButton(cancel)
@@ -139,27 +151,49 @@ class FridgeViewController: UIViewController {
         self.present(popup, animated: true, completion: nil)
     }
     
-    func addToFridge(ingredientName: String, foodGroup: String, fridgeID: String) {
-        fridgeRef.collection("ingredients").addDocument(data: [
-            "name": ingredientName,
-            "group": foodGroup
-        ]) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                print("Document successfully written!")
-                let index = self.foodGroups.lastIndex(of: foodGroup)
-                let idxPath = IndexPath(item: index!, section: 0)
-                self.fridge?.addIngredient(ingredient: Ingredient(name: ingredientName, group: foodGroup))
-                DispatchQueue.main.async {
-                    self.collectionView?.reloadItems(at: [idxPath])
-                }
-            }
+//    func addToFridge(ingredientName: String, aisleName: String, fridgeID: String) {
+//        fridgeRef.collection("ingredients").addDocument(data: [
+//            "name": ingredientName,
+//            "aisle": aisleName,
+//            "group": getGroupFromAisle(aisle: aisleName)
+//        ]) { err in
+//            if let err = err {
+//                print("Error writing document: \(err)")
+//            } else {
+//                print("Document successfully written!")
+//                let index = self.foodGroups.lastIndex(of: self.getGroupFromAisle(aisle: aisleName))
+//                let idxPath = IndexPath(item: index!, section: 0)
+//                Ingredient
+//                self.fridge?.addIngredient(ingredient: Ingredient(name: ingredientName, aisle: getGroupFromAisle(aisle: aisleName)))
+//                DispatchQueue.main.async {
+//                    self.collectionView?.reloadItems(at: [idxPath])
+//                }
+//            }
+//        }
+//    }
+
+    
+    func getGroupFromAisle(aisle: String) -> String {
+        switch aisle {
+        case "Pasta and Rice", "Bakery/Bread", "Bread":
+            return "Grains"
+        case "Meat", "Seafood":
+            return "Meat"
+        case "Milk, Eggs, Other Dairy", "Cheese":
+            return "Dairy"
+        case "Produce", "Dried Fruits":
+            return "Produce"
+        case "Oil, Vinegar, Salad Dressing":
+            return "Fats"
+        default:
+            return "Misc."
         }
     }
     
-    func getIngredientsOfFoodGroup(foodGroup: String) -> [Ingredient] {
-        return self.fridge?.ingredients.filter{$0.group == foodGroup} ?? [Ingredient]()
+    func getIngredientsOfFoodGroup(foodGroup: String) -> [Ingredient]? {
+        return (self.fridge?.ingredients.filter {
+            getGroupFromAisle(aisle: $0.aisle) == foodGroup
+        })
     }
 }
     

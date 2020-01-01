@@ -8,6 +8,7 @@
 
 import UIKit
 import Cosmos
+import PopupDialog
 
 class RecipeCell: BaseCell {
     
@@ -187,6 +188,7 @@ class RecipeCell: BaseCell {
             missingIngredientsButton.heightAnchor.constraint(equalToConstant: 35)
         ]
         NSLayoutConstraint.activate(missingIngredientsButtonConstraints)
+        missingIngredientsButton.addTarget(self, action: #selector(openIngredients), for: .touchUpInside)
         
         addSubview(usedIngredientsButton)
         let usedIngredientsButtonConstraints = [
@@ -196,6 +198,7 @@ class RecipeCell: BaseCell {
             usedIngredientsButton.heightAnchor.constraint(equalToConstant: 35)
         ]
         NSLayoutConstraint.activate(usedIngredientsButtonConstraints)
+        usedIngredientsButton.addTarget(self, action: #selector(openIngredients), for: .touchUpInside)
         
         addSubview(cookMeButton)
         let cookMeButtonConstraints = [
@@ -205,11 +208,10 @@ class RecipeCell: BaseCell {
             cookMeButton.heightAnchor.constraint(equalToConstant: 55)
         ]
         NSLayoutConstraint.activate(cookMeButtonConstraints)
-        
-        cookMeButton.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
+        cookMeButton.addTarget(self, action: #selector(cookButtonClicked), for: .touchUpInside)
     }
     
-    @objc func buttonClicked(sender : UIButton){
+    @objc func cookButtonClicked(sender : UIButton){
         if let recipes = recipe?.title{
             let alert = UIAlertController(title: "Are you hungry?", message: "Would you like to make \(recipes)?", preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "Yes", style: .cancel, handler: nil)
@@ -217,5 +219,32 @@ class RecipeCell: BaseCell {
             self.window?.rootViewController?.present(alert, animated: true, completion: nil)
             btnTapAction?()
         }
+    }
+    
+    @objc func openIngredients(sender : UIButton) {
+        let buttonName = sender.currentTitle!
+        var ingredients = [String]()
+        if (buttonName == "Missing Ingredients") {
+            for ingredient in (recipe?.missedIngredients!)! {
+                ingredients.append(ingredient.name.capitalized)
+            }
+        } else if (buttonName == "Used Ingredients") {
+            for ingredient in (recipe?.usedIngredients!)! {
+                ingredients.append(ingredient.name.capitalized)
+            }
+        }
+        let vc = PopupTableViewController(nibName: nil, bundle: nil)
+        let popup = PopupDialog(viewController: vc, transitionStyle: .zoomIn, tapGestureDismissal: false) {
+            guard let ingredient = vc.selectedIngredient else { return }
+            print("User selected ingredient: \(ingredient)")
+        }
+        let cancel = DefaultButton(title: "Cancel") {
+            print("User did not select an ingredient")
+        }
+        popup.addButton(cancel)
+        vc.name = buttonName
+        vc.ingredients = ingredients
+        vc.popup = popup
+        self.window?.rootViewController?.present(popup, animated: true, completion: nil)
     }
 }

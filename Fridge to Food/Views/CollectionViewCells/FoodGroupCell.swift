@@ -13,9 +13,9 @@ class FoodGroupCell : BaseCell {
     
     var ingredients: [Ingredient]? {
         didSet {
-            if (ingredients!.count > 0) {
+            if (ingredients?.count ?? -1 > 0) {
                 ingredientCountBadge.fadeTransition(0.4)
-                ingredientCountBadge.text = String(ingredients!.count)
+                ingredientCountBadge.text = String(ingredients?.count ?? 0)
             }
         }
     }

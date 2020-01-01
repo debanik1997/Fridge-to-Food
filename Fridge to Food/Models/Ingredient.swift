@@ -9,11 +9,15 @@
 import UIKit
 import Foundation
 
-struct Ingredient:Codable {
+struct Ingredient:Decodable {
+    var id:Int
     var name:String
-    var group: String
-    init(name: String, group: String) {
-        self.name = name
-        self.group = group
+    var aisle: String
+    var group: String?
+    
+    private enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case name = "name"
+        case aisle = "aisle"
     }
 }
