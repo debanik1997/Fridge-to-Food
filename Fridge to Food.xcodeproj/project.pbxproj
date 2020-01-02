@@ -32,6 +32,8 @@
 		39C3581523BD658400B853F5 /* URLQueryItemEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3581423BD658400B853F5 /* URLQueryItemEncoder.swift */; };
 		39C3581723BD65BC00B853F5 /* SpoonacularError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3581623BD65BC00B853F5 /* SpoonacularError.swift */; };
 		39C3581923BD65DA00B853F5 /* HTTPParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3581823BD65DA00B853F5 /* HTTPParameter.swift */; };
+		39C3581B23BD66EE00B853F5 /* SpoonacularIngredientClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3581A23BD66EE00B853F5 /* SpoonacularIngredientClient.swift */; };
+		39C3581D23BD68F500B853F5 /* GetIngredientInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3581C23BD68F500B853F5 /* GetIngredientInformation.swift */; };
 		39F0AC9823AE6E7A009EDC67 /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F0AC9723AE6E7A009EDC67 /* FridgeViewController.swift */; };
 		39F0AC9A23AE70E2009EDC67 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F0AC9923AE70E2009EDC67 /* BaseCell.swift */; };
 		39F0AC9C23AE7425009EDC67 /* FoodGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F0AC9B23AE7425009EDC67 /* FoodGroupCell.swift */; };
@@ -70,6 +72,8 @@
 		39C3581423BD658400B853F5 /* URLQueryItemEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLQueryItemEncoder.swift; sourceTree = "<group>"; };
 		39C3581623BD65BC00B853F5 /* SpoonacularError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoonacularError.swift; sourceTree = "<group>"; };
 		39C3581823BD65DA00B853F5 /* HTTPParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPParameter.swift; sourceTree = "<group>"; };
+		39C3581A23BD66EE00B853F5 /* SpoonacularIngredientClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoonacularIngredientClient.swift; sourceTree = "<group>"; };
+		39C3581C23BD68F500B853F5 /* GetIngredientInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetIngredientInformation.swift; sourceTree = "<group>"; };
 		39F0AC9723AE6E7A009EDC67 /* FridgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeViewController.swift; sourceTree = "<group>"; };
 		39F0AC9923AE70E2009EDC67 /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		39F0AC9B23AE7425009EDC67 /* FoodGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodGroupCell.swift; sourceTree = "<group>"; };
@@ -142,9 +146,8 @@
 			isa = PBXGroup;
 			children = (
 				39C3581323BD656000B853F5 /* Utils */,
-				39305D1623BBD24800552D54 /* Client */,
+				39305D1623BBD24800552D54 /* Clients */,
 				39305D1523BBD23200552D54 /* Requests */,
-				39C3581123BD627B00B853F5 /* DataContainer.swift */,
 			);
 			path = Spoonacular;
 			sourceTree = "<group>";
@@ -153,16 +156,18 @@
 			isa = PBXGroup;
 			children = (
 				3916C8A223B665F6003405B7 /* SearchRecipesByIngredients.swift */,
+				39C3581C23BD68F500B853F5 /* GetIngredientInformation.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
 		};
-		39305D1623BBD24800552D54 /* Client */ = {
+		39305D1623BBD24800552D54 /* Clients */ = {
 			isa = PBXGroup;
 			children = (
 				39305D1723BBD25D00552D54 /* SpoonacularRecipeClient.swift */,
+				39C3581A23BD66EE00B853F5 /* SpoonacularIngredientClient.swift */,
 			);
-			path = Client;
+			path = Clients;
 			sourceTree = "<group>";
 		};
 		3942D20123B157D600092406 /* CollectionViewCells */ = {
@@ -188,6 +193,7 @@
 		39C3581323BD656000B853F5 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				39C3581123BD627B00B853F5 /* DataContainer.swift */,
 				39C3581423BD658400B853F5 /* URLQueryItemEncoder.swift */,
 				39C3581623BD65BC00B853F5 /* SpoonacularError.swift */,
 				39C3581823BD65DA00B853F5 /* HTTPParameter.swift */,
@@ -403,6 +409,8 @@
 				3916C89E23B661E4003405B7 /* APIRequest.swift in Sources */,
 				39F0AC9C23AE7425009EDC67 /* FoodGroupCell.swift in Sources */,
 				39F0AC9823AE6E7A009EDC67 /* FridgeViewController.swift in Sources */,
+				39C3581D23BD68F500B853F5 /* GetIngredientInformation.swift in Sources */,
+				39C3581B23BD66EE00B853F5 /* SpoonacularIngredientClient.swift in Sources */,
 				3942D20023B12B2D00092406 /* PickerView.swift in Sources */,
 				39305D1823BBD25D00552D54 /* SpoonacularRecipeClient.swift in Sources */,
 				3942D1FA23B1278A00092406 /* IngredientPopupViewController.swift in Sources */,

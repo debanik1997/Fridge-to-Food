@@ -130,18 +130,7 @@ class FridgeViewController: UIViewController {
         
         let add = DefaultButton(title: "Add") {
             guard let ingredientName = ingredientPopupVC.selectedIngredient else { return }
-            print(ingredientName)
-            if let path = Bundle.main.path(forResource: "ingredients", ofType: "json") {
-                do {
-                    let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                    let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-                    if let dictionary = jsonResult as? Dictionary<String, AnyObject> {
-                        print("ID: \(dictionary[ingredientName.lowercased()] ?? "nil" as AnyObject)")
-                    }
-                } catch {
-                    print(error)
-                }
-            }
+            self.addButtonPressed(ingredientName)
             popup.dismiss()
         }
         ingredientPopupVC.foodGroups = self.foodGroups
@@ -151,29 +140,65 @@ class FridgeViewController: UIViewController {
         self.present(popup, animated: true, completion: nil)
     }
     
-//    func addToFridge(ingredientName: String, aisleName: String, fridgeID: String) {
-//        fridgeRef.collection("ingredients").addDocument(data: [
-//            "name": ingredientName,
-//            "aisle": aisleName,
-//            "group": getGroupFromAisle(aisle: aisleName)
-//        ]) { err in
-//            if let err = err {
-//                print("Error writing document: \(err)")
-//            } else {
-//                print("Document successfully written!")
-//                let index = self.foodGroups.lastIndex(of: self.getGroupFromAisle(aisle: aisleName))
-//                let idxPath = IndexPath(item: index!, section: 0)
-//                Ingredient
-//                self.fridge?.addIngredient(ingredient: Ingredient(name: ingredientName, aisle: getGroupFromAisle(aisle: aisleName)))
-//                DispatchQueue.main.async {
-//                    self.collectionView?.reloadItems(at: [idxPath])
-//                }
-//            }
-//        }
-//    }
+    fileprivate func addButtonPressed(_ ingredientName: String) {
+        if let path = Bundle.main.path(forResource: "ingredients", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+                if let dictionary = jsonResult as? Dictionary<String, AnyObject> {
+                    let id = Int((dictionary[ingredientName.lowercased()] as! String))!
+                    self.getIngredientInfo(id: id) { (ingredient) in
+                        self.addToFridge(ingredient: ingredient)
+                    }
+                }
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    func getIngredientInfo(id: Int, callback: @escaping (Ingredient) -> Void) {
+        let spoonacularIngredientClient = SpoonacularIngredientClient(apiKey: "488ea7c92d34469191c8296b57480d69")
+        spoonacularIngredientClient.send(GetIngredientInformation(id: id)) { response in
+            switch response {
+            case .success(let dataContainer):
+                var ingredient = dataContainer.results
+                ingredient.group = self.getGroupFromAisle(aisle: ingredient.aisle)
+                callback(ingredient)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func addToFridge(ingredient: Ingredient) {
+        let id = ingredient.id
+        let name = ingredient.name.capitalized
+        let aisle = ingredient.aisle
+        let group = ingredient.group!
+        fridgeRef.collection("ingredients").addDocument(data: [
+            "id": id,
+            "name": name,
+            "aisle": aisle,
+            "group": group
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+                let index = self.foodGroups.lastIndex(of: group)
+                let idxPath = IndexPath(item: index!, section: 0)
+                self.fridge?.addIngredient(ingredient: ingredient)
+                DispatchQueue.main.async {
+                    self.collectionView?.reloadItems(at: [idxPath])
+                }
+            }
+        }
+    }
 
     
     func getGroupFromAisle(aisle: String) -> String {
+        let components = aisle.split(separator: ";")
         switch aisle {
         case "Pasta and Rice", "Bakery/Bread", "Bread":
             return "Grains"
@@ -192,7 +217,7 @@ class FridgeViewController: UIViewController {
     
     func getIngredientsOfFoodGroup(foodGroup: String) -> [Ingredient]? {
         return (self.fridge?.ingredients.filter {
-            getGroupFromAisle(aisle: $0.aisle) == foodGroup
+            self.getGroupFromAisle(aisle: $0.aisle) == foodGroup
         })
     }
 }

@@ -8,7 +8,6 @@
 
 import Foundation
 
-// TO-DO
 struct SearchRecipesByIngredients: APIRequest {
     typealias Response = [Recipe]
 
@@ -16,7 +15,6 @@ struct SearchRecipesByIngredients: APIRequest {
         return "findByIngredients"
     }
     
-    // parameters
     let ingredients: String?
     let number: Int?
     let limitLicense: Bool?
