@@ -195,20 +195,18 @@ class FridgeViewController: UIViewController {
             }
         }
     }
-
     
     func getGroupFromAisle(aisle: String) -> String {
-        let components = aisle.split(separator: ";")
         switch aisle {
-        case "Pasta and Rice", "Bakery/Bread", "Bread":
+        case let str where str.contains("Pasta and Rice") || str.contains("Bakery/Bread") || str.contains("Bread"):
             return "Grains"
-        case "Meat", "Seafood":
+        case let str where str.contains("Meat") || str.contains("Seafood"):
             return "Meat"
-        case "Milk, Eggs, Other Dairy", "Cheese":
+        case let str where str.contains("Milk, Eggs, Other Dairy") || str.contains("Cheese"):
             return "Dairy"
-        case "Produce", "Dried Fruits":
+        case let str where str.contains("Produce") || str.contains("Dried Fruits"):
             return "Produce"
-        case "Oil, Vinegar, Salad Dressing":
+        case let str where str.contains("Oil, Vinegar, Salad Dressing"):
             return "Fats"
         default:
             return "Misc."

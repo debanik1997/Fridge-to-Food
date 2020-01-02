@@ -13,6 +13,8 @@
 		3916C89C23B661D4003405B7 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3916C89B23B661D4003405B7 /* APIClient.swift */; };
 		3916C89E23B661E4003405B7 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3916C89D23B661E4003405B7 /* APIRequest.swift */; };
 		3916C8A323B665F6003405B7 /* SearchRecipesByIngredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3916C8A223B665F6003405B7 /* SearchRecipesByIngredients.swift */; };
+		391B952423BE952500C673DC /* SearchRecipesComplex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391B952323BE952500C673DC /* SearchRecipesComplex.swift */; };
+		391B952623BE966600C673DC /* Diet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391B952523BE966600C673DC /* Diet.swift */; };
 		3925EDC923A57BFF00DA9347 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3925EDC823A57BFF00DA9347 /* GoogleService-Info.plist */; };
 		3925EDCB23A57F2800DA9347 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3925EDCA23A57F2800DA9347 /* User.swift */; };
 		3925EDCD23AD420F00DA9347 /* Fridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3925EDCC23AD420F00DA9347 /* Fridge.swift */; };
@@ -53,6 +55,8 @@
 		3916C89B23B661D4003405B7 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		3916C89D23B661E4003405B7 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		3916C8A223B665F6003405B7 /* SearchRecipesByIngredients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipesByIngredients.swift; sourceTree = "<group>"; };
+		391B952323BE952500C673DC /* SearchRecipesComplex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipesComplex.swift; sourceTree = "<group>"; };
+		391B952523BE966600C673DC /* Diet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diet.swift; sourceTree = "<group>"; };
 		3925EDC823A57BFF00DA9347 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3925EDCA23A57F2800DA9347 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3925EDCC23AD420F00DA9347 /* Fridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fridge.swift; sourceTree = "<group>"; };
@@ -148,8 +152,17 @@
 				39C3581323BD656000B853F5 /* Utils */,
 				39305D1623BBD24800552D54 /* Clients */,
 				39305D1523BBD23200552D54 /* Requests */,
+				391B952723BE967600C673DC /* Enums */,
 			);
 			path = Spoonacular;
+			sourceTree = "<group>";
+		};
+		391B952723BE967600C673DC /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				391B952523BE966600C673DC /* Diet.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		39305D1523BBD23200552D54 /* Requests */ = {
@@ -157,6 +170,7 @@
 			children = (
 				3916C8A223B665F6003405B7 /* SearchRecipesByIngredients.swift */,
 				39C3581C23BD68F500B853F5 /* GetIngredientInformation.swift */,
+				391B952323BE952500C673DC /* SearchRecipesComplex.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -408,6 +422,7 @@
 				3942D1FC23B127A900092406 /* IngredientPopupView.swift in Sources */,
 				3916C89E23B661E4003405B7 /* APIRequest.swift in Sources */,
 				39F0AC9C23AE7425009EDC67 /* FoodGroupCell.swift in Sources */,
+				391B952423BE952500C673DC /* SearchRecipesComplex.swift in Sources */,
 				39F0AC9823AE6E7A009EDC67 /* FridgeViewController.swift in Sources */,
 				39C3581D23BD68F500B853F5 /* GetIngredientInformation.swift in Sources */,
 				39C3581B23BD66EE00B853F5 /* SpoonacularIngredientClient.swift in Sources */,
@@ -417,6 +432,7 @@
 				398AA6C323B27BD5001815BE /* PopupTableView.swift in Sources */,
 				39C3581723BD65BC00B853F5 /* SpoonacularError.swift in Sources */,
 				3916C8A323B665F6003405B7 /* SearchRecipesByIngredients.swift in Sources */,
+				391B952623BE966600C673DC /* Diet.swift in Sources */,
 				39C3581223BD627B00B853F5 /* DataContainer.swift in Sources */,
 				390EA7C623A2853D004E74B0 /* UIExtensions.swift in Sources */,
 				390EA7C423A284E7004E74B0 /* RecipeCell.swift in Sources */,

@@ -25,7 +25,7 @@ class RecipeViewController: UICollectionViewController, UICollectionViewDelegate
     
     func fetch_recipes(ingredients: String) {
         let spoonacularRecipeClient = SpoonacularRecipeClient(apiKey: "488ea7c92d34469191c8296b57480d69")
-        spoonacularRecipeClient.send(SearchRecipesByIngredients(ingredients: ingredients, number: 10)) { response in
+        spoonacularRecipeClient.send(SearchRecipesByIngredients(ingredients: ingredients, number: 10, ranking: 1)) { response in
             switch response {
             case .success(let dataContainer):
                 self.recipes = [Recipe]()
