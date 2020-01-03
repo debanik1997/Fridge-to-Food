@@ -9,14 +9,15 @@
 import Foundation
 
 public enum Diet : String, Codable {
-    case glutenfree = "gluten free"
-    case ketogenic
-    case vegetarian
-    case lactovegetarian = "lacto-vegetarian"
-    case ovovegetarian = "ovo-vegetarian"
-    case vegan
-    case pescetarian
-    case paleo
-    case primal
-    case whole30
+    case Glutenfree = "Gluten Free"
+    case Ketogenic
+    case Vegetarian
+    case Lactovegetarian = "Lacto-vegetarian"
+    case Ovovegetarian = "Ovo-vegetarian"
+    case Vegan
+    case Pescetarian
+    case Paleo
+    case Primal
+    case Whole30
+    case None = "None"
 }

@@ -9,16 +9,30 @@
 import Foundation
 
 struct SearchRecipesComplex : APIRequest {
-    typealias Response = [Recipe]
+    typealias Response = ComplexRecipeResponse
 
     var resourceName: String {
-        return "recipes/complexSearch"
+        return "complexSearch"
     }
     
     let query: String?
-    let cuisine: String?
-    let excludeCuisine: String?
     let diet: Diet?
     let intolerances: String?
+    let includeIngredients: String?
+    let type: MealType?
+    let sort: SortType?
     
+    init(query: String? = nil,
+         diet: Diet? = nil,
+         intolerances: String? = nil,
+         includeIngredients: String? = nil,
+         type: MealType? = nil,
+         sort: SortType? = nil) {
+        self.query = query
+        self.diet = diet
+        self.intolerances = intolerances
+        self.includeIngredients = includeIngredients
+        self.type = type
+        self.sort = sort
+    }
 }

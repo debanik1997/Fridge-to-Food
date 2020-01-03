@@ -167,6 +167,7 @@ PODS:
   - BoringSSL-GRPC/Interface (0.0.3)
   - Cosmos (20.0.1)
   - DynamicBlurView (4.0.0)
+  - Eureka (5.1.0)
   - FaceAware (2.1.0)
   - Firebase/Analytics (6.14.0):
     - Firebase/Core
@@ -286,6 +287,7 @@ PODS:
 DEPENDENCIES:
   - BadgeSwift (~> 8.0)
   - Cosmos (~> 20.0)
+  - Eureka
   - FaceAware
   - Firebase/Analytics
   - Firebase/Auth
@@ -302,6 +304,7 @@ SPEC REPOS:
     - BoringSSL-GRPC
     - Cosmos
     - DynamicBlurView
+    - Eureka
     - FaceAware
     - Firebase
     - FirebaseAnalytics
@@ -331,6 +334,7 @@ SPEC CHECKSUMS:
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
   Cosmos: b47fddf2102bb48580cd3025d9ce0a5c658a65da
   DynamicBlurView: ccf9acd2b20c883cc2c72e3524a04d8d3ee20533
+  Eureka: 18a5076dcf0c41f9cd9748aa1c42f4d11434bdae
   FaceAware: f1266b8719a1a90da3d763b8cb428554edf0fa61
   Firebase: 0219bb4782eb1406f1b9b0628a2e625484ce910d
   FirebaseAnalytics: f68b9f3f1241385129ae0a83b63627fc420c05e5
@@ -354,6 +358,6 @@ SPEC CHECKSUMS:
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PopupDialog: 720c92befd8bc23c13442254945213db5612f149
 
-PODFILE CHECKSUM: 34baa72842aa7a82b34372a4c436043c6bd535fa
+PODFILE CHECKSUM: ab69a1d9d1849672ec1cbe3ad93fadc163ac316b
 
 COCOAPODS: 1.8.4

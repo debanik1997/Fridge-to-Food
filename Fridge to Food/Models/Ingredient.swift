@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-struct Ingredient:Decodable {
+struct Ingredient: Decodable, Hashable, CustomStringConvertible {
     var id:Int
     var name:String
     var aisle: String
@@ -19,5 +19,13 @@ struct Ingredient:Decodable {
         case id = "id"
         case name = "name"
         case aisle = "aisle"
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    public var description: String {
+        return name
     }
 }

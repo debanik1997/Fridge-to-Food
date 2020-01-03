@@ -17,5 +17,6 @@ target 'Fridge to Food' do
   pod 'BadgeSwift', '~> 8.0'
   pod 'Cosmos', '~> 20.0'
   pod 'iOSDropDown'
+  pod 'Eureka'
 
 end

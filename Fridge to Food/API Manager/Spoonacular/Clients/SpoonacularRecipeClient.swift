@@ -20,6 +20,7 @@ public class SpoonacularRecipeClient : APIClient {
     
     func send<T: APIRequest>(_ request: T, completion: @escaping ResultCallback<DataContainer<T.Response>>) {
         let endpoint = self.endpoint(for: request)
+        print(endpoint)
         let task = session.dataTask(with: URLRequest(url: endpoint)) { data, response, error in
             if let data = data {
                 do {

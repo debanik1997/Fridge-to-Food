@@ -26,6 +26,11 @@
 		3942D1FA23B1278A00092406 /* IngredientPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3942D1F923B1278A00092406 /* IngredientPopupViewController.swift */; };
 		3942D1FC23B127A900092406 /* IngredientPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3942D1FB23B127A900092406 /* IngredientPopupView.swift */; };
 		3942D20023B12B2D00092406 /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3942D1FF23B12B2D00092406 /* PickerView.swift */; };
+		3953795023BEEC0A00A0B97E /* CameraCaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3953794F23BEEC0A00A0B97E /* CameraCaptureViewController.swift */; };
+		3953795223BEEE2A00A0B97E /* ComplexRecipeSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3953795123BEEE2A00A0B97E /* ComplexRecipeSearchViewController.swift */; };
+		3953795623BFB45500A0B97E /* MealType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3953795523BFB45500A0B97E /* MealType.swift */; };
+		3953795823BFB4FB00A0B97E /* SortType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3953795723BFB4FB00A0B97E /* SortType.swift */; };
+		3953795A23BFC20900A0B97E /* ComplexRecipeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3953795923BFC20900A0B97E /* ComplexRecipeResponse.swift */; };
 		398AA6C123B27BB5001815BE /* PopupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398AA6C023B27BB5001815BE /* PopupTableViewController.swift */; };
 		398AA6C323B27BD5001815BE /* PopupTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398AA6C223B27BD5001815BE /* PopupTableView.swift */; };
 		398AA6C523B27BEC001815BE /* PopupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398AA6C423B27BEC001815BE /* PopupTableViewCell.swift */; };
@@ -68,6 +73,11 @@
 		3942D1F923B1278A00092406 /* IngredientPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientPopupViewController.swift; sourceTree = "<group>"; };
 		3942D1FB23B127A900092406 /* IngredientPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientPopupView.swift; sourceTree = "<group>"; };
 		3942D1FF23B12B2D00092406 /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
+		3953794F23BEEC0A00A0B97E /* CameraCaptureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraCaptureViewController.swift; sourceTree = "<group>"; };
+		3953795123BEEE2A00A0B97E /* ComplexRecipeSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexRecipeSearchViewController.swift; sourceTree = "<group>"; };
+		3953795523BFB45500A0B97E /* MealType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealType.swift; sourceTree = "<group>"; };
+		3953795723BFB4FB00A0B97E /* SortType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortType.swift; sourceTree = "<group>"; };
+		3953795923BFC20900A0B97E /* ComplexRecipeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexRecipeResponse.swift; sourceTree = "<group>"; };
 		398AA6C023B27BB5001815BE /* PopupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupTableViewController.swift; sourceTree = "<group>"; };
 		398AA6C223B27BD5001815BE /* PopupTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupTableView.swift; sourceTree = "<group>"; };
 		398AA6C423B27BEC001815BE /* PopupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupTableViewCell.swift; sourceTree = "<group>"; };
@@ -161,6 +171,8 @@
 			isa = PBXGroup;
 			children = (
 				391B952523BE966600C673DC /* Diet.swift */,
+				3953795523BFB45500A0B97E /* MealType.swift */,
+				3953795723BFB4FB00A0B97E /* SortType.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -211,6 +223,7 @@
 				39C3581423BD658400B853F5 /* URLQueryItemEncoder.swift */,
 				39C3581623BD65BC00B853F5 /* SpoonacularError.swift */,
 				39C3581823BD65DA00B853F5 /* HTTPParameter.swift */,
+				3953795923BFC20900A0B97E /* ComplexRecipeResponse.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -259,6 +272,8 @@
 				39FA028E23A01181004A807A /* RecipeSearchViewController.swift */,
 				392805AC23A1E8BF00C39248 /* RecipeViewController.swift */,
 				39F0AC9723AE6E7A009EDC67 /* FridgeViewController.swift */,
+				3953794F23BEEC0A00A0B97E /* CameraCaptureViewController.swift */,
+				3953795123BEEE2A00A0B97E /* ComplexRecipeSearchViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -412,12 +427,15 @@
 				39FA028B23A01181004A807A /* AppDelegate.swift in Sources */,
 				398AA6C123B27BB5001815BE /* PopupTableViewController.swift in Sources */,
 				3925EDCD23AD420F00DA9347 /* Fridge.swift in Sources */,
+				3953795823BFB4FB00A0B97E /* SortType.swift in Sources */,
 				390EA7C923A2ADC4004E74B0 /* Ingredient.swift in Sources */,
 				39C3581923BD65DA00B853F5 /* HTTPParameter.swift in Sources */,
 				39305D1223BAF9CF00552D54 /* levenshtein.swift in Sources */,
 				3916C89C23B661D4003405B7 /* APIClient.swift in Sources */,
 				392805AD23A1E8BF00C39248 /* RecipeViewController.swift in Sources */,
 				398AA6C523B27BEC001815BE /* PopupTableViewCell.swift in Sources */,
+				3953795623BFB45500A0B97E /* MealType.swift in Sources */,
+				3953795A23BFC20900A0B97E /* ComplexRecipeResponse.swift in Sources */,
 				39F0AC9A23AE70E2009EDC67 /* BaseCell.swift in Sources */,
 				3942D1FC23B127A900092406 /* IngredientPopupView.swift in Sources */,
 				3916C89E23B661E4003405B7 /* APIRequest.swift in Sources */,
@@ -436,8 +454,10 @@
 				39C3581223BD627B00B853F5 /* DataContainer.swift in Sources */,
 				390EA7C623A2853D004E74B0 /* UIExtensions.swift in Sources */,
 				390EA7C423A284E7004E74B0 /* RecipeCell.swift in Sources */,
+				3953795223BEEE2A00A0B97E /* ComplexRecipeSearchViewController.swift in Sources */,
 				39FA028D23A01181004A807A /* SceneDelegate.swift in Sources */,
 				39C3581523BD658400B853F5 /* URLQueryItemEncoder.swift in Sources */,
+				3953795023BEEC0A00A0B97E /* CameraCaptureViewController.swift in Sources */,
 				39FA02A423A04DB1004A807A /* Recipe.swift in Sources */,
 				3925EDCB23A57F2800DA9347 /* User.swift in Sources */,
 				39BC05FF23B529EA0013AA0E /* ColorExtensions.swift in Sources */,

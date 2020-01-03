@@ -20,7 +20,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
+        
         let searchVC = RecipeSearchViewController()
+        let complexSearchVC = ComplexRecipeSearchViewController()
         let fridgeVC = FridgeViewController()
         
         let tabBarController = UITabBarController()
@@ -35,9 +37,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         fridgeItem.image = UIImage(named: "fridge")
         fridgeVC.tabBarItem = fridgeItem
         
-        tabBarController.viewControllers = [searchVC, fridgeVC]
+        let complexSearchItem = UITabBarItem()
+        complexSearchItem.title = "Search"
+        complexSearchItem.image = UIImage(named: "search")
+        complexSearchVC.tabBarItem = complexSearchItem
+        
+        
+        tabBarController.viewControllers = [searchVC, complexSearchVC, fridgeVC]
         tabBarController.selectedViewController = searchVC
-        tabBarController.selectedIndex = 2
+        tabBarController.selectedIndex = 0
         tabBarController.tabBar.barTintColor = UIColor(hexString: "2F9C95")
         tabBarController.tabBar.tintColor = .white
         let navController = UINavigationController(rootViewController: tabBarController)
