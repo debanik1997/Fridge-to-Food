@@ -54,7 +54,11 @@ class RecipeSearchViewController: UIViewController {
     
     @objc func searchForRecipes() {
         textField.resignFirstResponder()
-        self.navigationController!.pushViewController(RecipeViewController(ingredients: textField.text ?? ""), animated: true)
+        self.fetch_recipes(ingredients: textField.text ?? "") { (recipes) in
+            DispatchQueue.main.async {
+                self.navigationController!.pushViewController(RecipeViewController(recipes: recipes), animated: true)
+            }
+        }
     }
    
     @objc func searchForRecipesFromFridge() {
@@ -68,9 +72,30 @@ class RecipeSearchViewController: UIViewController {
                     for document in querySnapshot!.documents {
                         ingredientString = "\(ingredientString)\(document.data()["name"] ?? ""), "
                     }
-                    self.navigationController!.pushViewController(RecipeViewController(ingredients: ingredientString), animated: true)
+                    self.fetch_recipes(ingredients: ingredientString) { (recipes) in
+                        DispatchQueue.main.async {
+                            self.navigationController!.pushViewController(RecipeViewController(recipes: recipes), animated: true)
+                        }
+                    }
                 }
             }
+    }
+    
+    func fetch_recipes(ingredients: String, callback: @escaping ([Recipe]) -> Void) {
+        let spoonacularRecipeClient = SpoonacularRecipeClient(apiKey: "488ea7c92d34469191c8296b57480d69")
+        spoonacularRecipeClient.send(SearchRecipesByIngredients(ingredients: ingredients, number: 10, ranking: 1)) { response in
+            switch response {
+            case .success(let dataContainer):
+                var recipes = [Recipe]()
+                for recipe in dataContainer.results {
+                    recipes.append(recipe)
+                }
+                callback(recipes)
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     override func viewDidLoad() {
