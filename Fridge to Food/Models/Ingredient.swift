@@ -12,7 +12,7 @@ import Foundation
 struct Ingredient: Decodable, Hashable, CustomStringConvertible {
     var id:Int
     var name:String
-    var aisle: String
+    var aisle: String?
     var group: String?
     
     private enum CodingKeys: String, CodingKey {

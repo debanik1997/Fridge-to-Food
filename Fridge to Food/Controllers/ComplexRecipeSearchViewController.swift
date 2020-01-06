@@ -11,7 +11,6 @@ import Eureka
 import FirebaseFirestore
 
 class ComplexRecipeSearchViewController: FormViewController {
-    var ingredients = [Ingredient]()
     var diets = [Diet]()
     private var fridge: Fridge?
     var fridgeRef: DocumentReference!
@@ -28,7 +27,7 @@ class ComplexRecipeSearchViewController: FormViewController {
                     let jsonData = try? JSONSerialization.data(withJSONObject:result)
                     if let json = jsonData {
                         var ingredient = try! JSONDecoder().decode(Ingredient.self, from: json)
-                        ingredient.group = self.getGroupFromAisle(aisle: ingredient.aisle)
+                        ingredient.group = self.getGroupFromAisle(aisle: ingredient.aisle ?? "")
                         testFridge.addIngredient(ingredient: ingredient)
                     }
                 }
@@ -65,8 +64,6 @@ class ComplexRecipeSearchViewController: FormViewController {
         super.viewDidLoad()
         self.fridgeRef = Firestore.firestore().collection("fridges").document("1")
         self.getFridge(fridgeDocRef: self.fridgeRef)
-        ingredients.append(Ingredient(id: 10, name: "Chicken", aisle: "Meat", group: "Meat"))
-        ingredients.append(Ingredient(id: 12, name: "Broccoli", aisle: "Produce", group: "Produce"))
         diets.append(Diet.None)
         diets.append(Diet.Vegetarian)
         diets.append (Diet.Paleo)
@@ -125,7 +122,7 @@ class ComplexRecipeSearchViewController: FormViewController {
         if (diet == Diet.None) {
             dietString = ""
         }
-        spoonacularRecipeClient.send(SearchRecipesComplex(query: query, diet: dietString, includeIngredients: ingredientString, number: 2)) { response in
+        spoonacularRecipeClient.send(SearchRecipesComplex(query: query, diet: dietString, includeIngredients: ingredientString, sort: "popularity", fillIngredients: true, number: 10)) { response in
             switch response {
             case .success(let dataContainer):
                 DispatchQueue.main.async {

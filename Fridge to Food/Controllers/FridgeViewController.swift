@@ -163,7 +163,7 @@ class FridgeViewController: UIViewController {
             switch response {
             case .success(let dataContainer):
                 var ingredient = dataContainer.results
-                ingredient.group = self.getGroupFromAisle(aisle: ingredient.aisle)
+                ingredient.group = self.getGroupFromAisle(aisle: ingredient.aisle ?? "")
                 callback(ingredient)
             case .failure(let error):
                 print(error)
@@ -179,7 +179,7 @@ class FridgeViewController: UIViewController {
         fridgeRef.collection("ingredients").addDocument(data: [
             "id": id,
             "name": name,
-            "aisle": aisle,
+            "aisle": aisle ?? "",
             "group": group
         ]) { err in
             if let err = err {
@@ -215,7 +215,7 @@ class FridgeViewController: UIViewController {
     
     func getIngredientsOfFoodGroup(foodGroup: String) -> [Ingredient]? {
         return (self.fridge?.ingredients.filter {
-            self.getGroupFromAisle(aisle: $0.aisle) == foodGroup
+            self.getGroupFromAisle(aisle: $0.aisle ?? "") == foodGroup
         })
     }
 }

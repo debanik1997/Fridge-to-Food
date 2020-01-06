@@ -17,7 +17,6 @@ class IngredientPopupView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor(red: 0.25, green: 0.53, blue: 0.91, alpha: 1)
         label.textAlignment = .center
-        label.backgroundColor = UIColor(hexString: "A3F7B5")
         return label
     }()
     
@@ -48,20 +47,29 @@ class IngredientPopupView: UIView {
     
     lazy var ingredientDropdown : DropDown = {
         let  dropDown = DropDown(frame: .zero) // set frame
-        // The list of array to display. Can be changed dynamically
-//        let dropDown = DropDown()
         dropDown.translatesAutoresizingMaskIntoConstraints = false
         dropDown.optionArray = ["debanik", "purkayastha"]
         dropDown.placeholder = "Name of ingredient..."
         dropDown.listHeight = 100
+        dropDown.backgroundColor = UIColor(hexString: "E5F9E0")
         return dropDown
+    }()
+    
+    lazy var dropDownHolder : UIView = {
+        let  view = UIView(frame: .zero) // set frame
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 5.0
+        view.layer.borderColor = UIColor.gray.cgColor
+        view.layer.borderWidth = 1.5
+        view.backgroundColor = UIColor(hexString: "E5F9E0")
+        return view
     }()
     
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
         
         // Setup constraints
-        heightAnchor.constraint(equalToConstant: 320).isActive = true
+        heightAnchor.constraint(equalToConstant: 220).isActive = true
         
         addSubview(titleLabel)
         let titleLabelConstraints = [
@@ -71,24 +79,24 @@ class IngredientPopupView: UIView {
         ]
         NSLayoutConstraint.activate(titleLabelConstraints)
         
-        addSubview(ingredientDropdown)
+        addSubview(dropDownHolder)
+        
+        let ingredientDropdownHolderConstraints = [
+            dropDownHolder.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            dropDownHolder.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+            dropDownHolder.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20),
+            dropDownHolder.heightAnchor.constraint(equalToConstant: 70)
+        ]
+        NSLayoutConstraint.activate(ingredientDropdownHolderConstraints)
+        
+        dropDownHolder.addSubview(ingredientDropdown)
         let ingredientDropdownConstraints = [
-            ingredientDropdown.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 100),
-            ingredientDropdown.widthAnchor.constraint(equalTo: widthAnchor, constant: -20),
+            ingredientDropdown.centerYAnchor.constraint(equalTo: dropDownHolder.centerYAnchor),
+            ingredientDropdown.leadingAnchor.constraint(equalTo: dropDownHolder.leadingAnchor, constant: 10),
+            ingredientDropdown.rightAnchor.constraint(equalTo: dropDownHolder.rightAnchor, constant: -25),
             ingredientDropdown.heightAnchor.constraint(equalToConstant: 70)
         ]
         NSLayoutConstraint.activate(ingredientDropdownConstraints)
         
-        
-//        var constraints = [NSLayoutConstraint]()
-//        let views: [String: UIView] = [
-//            "titleLabel": titleLabel, "foodGroupPicker": foodGroupPicker, "ingredientDropdown": ingredientDropdown
-//        ]
-//        constraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|[foodGroupPicker]|", options: [], metrics: nil, views: views)
-//        constraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|[titleLabel]|", options: [], metrics: nil, views: views)
-//        constraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|[ingredientDropdown]|", options: [], metrics: nil, views: views)
-//
-//        constraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|[titleLabel(100)][ingredientDropdown(50)][foodGroupPicker]|", options: [], metrics: nil, views: views)
-//        NSLayoutConstraint.activate(constraints)
     }
 }

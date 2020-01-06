@@ -19,7 +19,7 @@ class Fridge: CustomStringConvertible {
     public var description: String {
         var s = ""
         for ingredient in self.ingredients {
-            s.append("[\(ingredient.aisle): \(ingredient.name))]")
+            s.append("[\(ingredient.aisle ?? "No Aisle"): \(ingredient.name))]")
             s.append(", ")
         }
         return s

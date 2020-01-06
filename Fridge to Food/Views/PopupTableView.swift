@@ -23,7 +23,6 @@ class PopupTableView: UIView {
     lazy var tableView: UITableView = {
         let tv = UITableView(frame: .zero)
         tv.translatesAutoresizingMaskIntoConstraints = false
-        tv.isUserInteractionEnabled = true
         return tv
     }()
     
@@ -39,7 +38,7 @@ class PopupTableView: UIView {
         
         var constraints = [NSLayoutConstraint]()
         let views: [String: UIView] = ["titleLabel": titleLabel, "tableView": tableView]
-        constraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|[tableView]|", options: [], metrics: nil, views: views)
+        constraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|[tableView]-30-|", options: [], metrics: nil, views: views)
         constraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|[titleLabel(50)][tableView]|", options: [], metrics: nil, views: views)
         constraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|[titleLabel]|", options: [], metrics: nil, views: views)
         NSLayoutConstraint.activate(constraints)

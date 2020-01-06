@@ -21,6 +21,7 @@ struct SearchRecipesComplex : APIRequest {
     let includeIngredients: String?
     let type: String?
     let sort: String?
+    let fillIngredients: Bool?
     let number: Int?
     
     init(query: String? = nil,
@@ -28,13 +29,16 @@ struct SearchRecipesComplex : APIRequest {
          intolerances: String? = nil,
          includeIngredients: String? = nil,
          type: String? = nil,
-         sort: String? = nil, number: Int? = nil) {
+         sort: String? = nil,
+         fillIngredients: Bool? = nil,
+         number: Int? = nil) {
         self.query = query
         self.diet = diet
         self.intolerances = intolerances
         self.includeIngredients = includeIngredients
         self.type = type
         self.sort = sort
+        self.fillIngredients = fillIngredients
         self.number = number
     }
 }

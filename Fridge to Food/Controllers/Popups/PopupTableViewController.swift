@@ -53,7 +53,7 @@ final class PopupTableViewController: UIViewController {
         baseView.titleLabel.text = "Ingredients"
         
         // Setup tableView
-        baseView.tableView.register(PopupTableViewCell.self, forCellReuseIdentifier: PopupTableViewCell.cellIdentifier)
+        baseView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         baseView.tableView.dataSource = self
         baseView.tableView.delegate = self
     }
@@ -67,10 +67,20 @@ extension PopupTableViewController: UITableViewDataSource {
         return ingredients.count
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+           return true
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: PopupTableViewCell.cellIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = ingredients[indexPath.row]
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            print("Deleting \(indexPath)")
+        }
     }
 }
 
@@ -82,17 +92,5 @@ extension PopupTableViewController: UITableViewDelegate {
         selectedIngredient = ingredients[indexPath.row]
         popup?.dismiss(animated: true)
     }
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
 
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if (editingStyle == .delete) {
-            // handle delete (by removing the data from your array and updating the tableview)
-            print("Deleting \(indexPath)")
-            ingredients.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
-        }
-    }
 }
